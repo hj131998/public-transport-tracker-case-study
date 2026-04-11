@@ -1,0 +1,69 @@
+# ── Java / Maven ─────────────────────────────────────────────────────────────
+target/
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+*.zip
+*.tar.gz
+*.rar
+hs_err_pid*
+replay_pid*
+
+# ── Spring Boot ───────────────────────────────────────────────────────────────
+*.log
+logs/
+spring-shell.log
+
+# ── IDE ───────────────────────────────────────────────────────────────────────
+.idea/
+*.iml
+*.iws
+*.ipr
+.project
+.classpath
+.settings/
+*.launch
+.factorypath
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# ── VS Code ───────────────────────────────────────────────────────────────────
+.vscode/*
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# ── Node / Frontend ───────────────────────────────────────────────────────────
+node_modules/
+dist/
+dist-ssr/
+*.local
+frontend/.env
+frontend/coverage/
+
+# ── Environment / Secrets ─────────────────────────────────────────────────────
+.env
+backend/.env
+*.env.local
+*.env.*.local
+
+# ── Docker ────────────────────────────────────────────────────────────────────
+.docker/
+
+# ── OS ────────────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Misc ──────────────────────────────────────────────────────────────────────
+*.orig
+*.bak
+*.tmp
+docx_extracted/
+*.zip
+Case\ Study.zip
+Public_Transport_Tracker_Updated_Case_Study.zip

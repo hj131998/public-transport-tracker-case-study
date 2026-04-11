@@ -15,10 +15,12 @@ management:
   endpoints:
     web:
       exposure:
-        include: health,info,metrics,prometheus
+        include: health,info,metrics,prometheus,circuitbreakers,circuitbreakerevents
   endpoint:
     health:
       show-details: always
+    circuitbreakers:
+      enabled: true
   metrics:
     tags:
       application: ${spring.application.name}
@@ -67,7 +69,7 @@ app:
       # Free MTA GTFS-RT endpoint (no API key required)
       # Full URL pattern: {base-url}/Dataservice/mtagtfsfeeds/nyct%2F{feedName}
       # Example: https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/nyct%2Fgtfs-l
-      base-url: ${MTA_BASE_URL:https://api-endpoint.mta.info}
+      base-url: "https://api-endpoint.mta.info"
       timeout-seconds: 10
       # Feed paths per line group (managed by MtaFeedRegistry)
       # nyct%2Fgtfs       (1,2,3,4,5,6,7,S)

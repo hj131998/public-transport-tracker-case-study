@@ -15,14 +15,19 @@ import java.util.concurrent.TimeUnit;
 public class WebClientConfig {
 
     @Bean
-    public WebClient.Builder webClientBuilder() {
+    public ReactorClientHttpConnector reactorClientHttpConnector() {
         HttpClient httpClient = HttpClient.create()
                 .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 5000)
                 .doOnConnected(conn -> conn
                         .addHandlerLast(new ReadTimeoutHandler(5, TimeUnit.SECONDS))
                         .addHandlerLast(new WriteTimeoutHandler(5, TimeUnit.SECONDS)));
+        return new ReactorClientHttpConnector(httpClient);
+    }
 
-        return WebClient.builder()
-                .clientConnector(new ReactorClientHttpConnector(httpClient));
+    // Kept for any Spring Boot autoconfiguration that injects WebClient.Builder,
+    // but individual clients must NOT call .baseUrl() on this — use the connector bean directly.
+    @Bean
+    public WebClient.Builder webClientBuilder(ReactorClientHttpConnector connector) {
+        return WebClient.builder().clientConnector(connector);
     }
 }

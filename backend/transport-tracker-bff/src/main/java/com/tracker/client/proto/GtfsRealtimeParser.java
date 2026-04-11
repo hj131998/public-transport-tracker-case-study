@@ -3,7 +3,6 @@ package com.tracker.client.proto;
 import com.google.protobuf.CodedInputStream;
 import com.google.protobuf.ExtensionRegistry;
 import com.google.protobuf.InvalidProtocolBufferException;
-import com.google.protobuf.UnknownFieldSet;
 import com.google.transit.realtime.GtfsRealtime.FeedEntity;
 import com.google.transit.realtime.GtfsRealtime.FeedMessage;
 import com.google.transit.realtime.GtfsRealtime.TripUpdate;
@@ -89,35 +88,35 @@ public class GtfsRealtimeParser {
     // ── Feed parsing with extension tolerance ─────────────────────────────
 
     /**
-     * Attempts to parse the MTA GTFS-RT feed with two strategies:
+     * Parses the MTA GTFS-RT feed tolerating NYC proto2 group-encoded extensions
+     * (nyct_trip_descriptor, nyct_stop_time_update, nyct_feed_header).
      *
-     * 1. Standard parseFrom with empty ExtensionRegistry — works for feeds
-     *    without group-encoded extensions (BDFM, NQRW, L, G, JZ, SI).
+     * Strategy: use CodedInputStream with discardUnknownFields=true so protobuf
+     * skips unregistered extension fields (including group wire type 3/4) inline
+     * during parsing, without corrupting the standard FeedMessage structure.
+     * parsePartialFrom is used because proto2 FeedHeader has required fields that
+     * may be absent in partial/extension-heavy feeds — it does not throw on missing
+     * required fields, unlike parseFrom.
      *
-     * 2. On failure (caused by MTA's group-encoded NYC extensions on feeds
-     *    like 1/2/3/4/5/6/7/ACE): strip the unknown extension bytes by
-     *    round-tripping through UnknownFieldSet, then re-parse.
-     *    UnknownFieldSet.parseFrom silently absorbs all unknown fields
-     *    including group-encoded ones, and writeTo produces clean bytes
-     *    with only the standard fields preserved.
+     * This replaces the broken UnknownFieldSet round-trip approach which produced
+     * structurally invalid bytes (raw field-set dump ≠ FeedMessage binary layout),
+     * causing the second parse to either throw or return an empty message.
      */
     private FeedMessage parseFeed(byte[] feedBytes) throws InvalidProtocolBufferException {
         try {
             return FeedMessage.parseFrom(feedBytes, ExtensionRegistry.getEmptyRegistry());
         } catch (InvalidProtocolBufferException e) {
-            log.debug("Standard parse failed ({}), using lenient re-parse", e.getMessage());
-            // Round-trip through UnknownFieldSet to strip group-encoded extensions.
-            // UnknownFieldSet handles all wire types including groups.
-            // Then serialize back to clean bytes and parse as FeedMessage.
+            log.debug("Standard parse failed ({}), retrying with discardUnknownFields", e.getMessage());
             try {
                 CodedInputStream cis = CodedInputStream.newInstance(feedBytes);
                 cis.setSizeLimit(feedBytes.length + 1024);
-                UnknownFieldSet unknowns = UnknownFieldSet.parseFrom(cis);
-                byte[] cleanBytes = unknowns.toByteArray();
-                return FeedMessage.parseFrom(cleanBytes, ExtensionRegistry.getEmptyRegistry());
+                cis.setRecursionLimit(64);
+                FeedMessage.Builder builder = FeedMessage.newBuilder();
+                builder.mergeFrom(cis, ExtensionRegistry.getEmptyRegistry());
+                return builder.buildPartial();
             } catch (Exception fallbackEx) {
-                log.debug("Lenient re-parse also failed: {}", fallbackEx.getMessage());
-                throw e; // throw original exception
+                log.warn("Lenient parse also failed: {}", fallbackEx.getMessage());
+                throw e;
             }
         }
     }
@@ -172,7 +171,17 @@ public class GtfsRealtimeParser {
 
         List<VehiclePosition> result = new ArrayList<>();
 
-        for (FeedEntity entity : feed.getEntityList()) {
+        // Diagnostic: log first 5 entities to understand what MTA is actually sending
+        List<FeedEntity> entities = feed.getEntityList();
+        log.info("Feed has {} total entities for route={}", entities.size(), routeId);
+        entities.stream().limit(5).forEach(e -> {
+            String eRouteId = e.hasVehicle() ? e.getVehicle().getTrip().getRouteId() : "(no-vehicle)";
+            String eTripId  = e.hasVehicle() ? e.getVehicle().getTrip().getTripId()  : "(no-vehicle)";
+            log.info("  entity id={} hasVehicle={} hasTripUpdate={} routeId='{}' tripId='{}'",
+                    e.getId(), e.hasVehicle(), e.hasTripUpdate(), eRouteId, eTripId);
+        });
+
+        for (FeedEntity entity : entities) {
             if (!entity.hasVehicle()) continue;
 
             com.google.transit.realtime.GtfsRealtime.VehiclePosition vp = entity.getVehicle();

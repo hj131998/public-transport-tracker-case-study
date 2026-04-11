@@ -6,6 +6,7 @@ import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.retry.annotation.Retry;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -20,11 +21,12 @@ public class TransitLandClient implements TransitDataProvider {
     private final WebClient webClient;
 
     public TransitLandClient(
-            WebClient.Builder webClientBuilder,
+            ReactorClientHttpConnector connector,
             @Value("${app.transit-api.transit-land.base-url}") String baseUrl,
             @Value("${app.transit-api.transit-land.api-key}") String apiKey,
             @Value("${app.transit-api.transit-land.timeout-seconds:5}") int timeoutSeconds) {
-        this.webClient = webClientBuilder
+        this.webClient = WebClient.builder()
+                .clientConnector(connector)
                 .baseUrl(baseUrl)
                 .defaultHeader("apikey", apiKey)
                 .build();
