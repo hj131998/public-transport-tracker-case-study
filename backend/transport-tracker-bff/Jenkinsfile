@@ -1,0 +1,188 @@
+pipeline {
+    agent any
+
+    environment {
+        APP_NAME        = 'transport-tracker-bff'
+        IMAGE_NAME      = "transport-tracker/${APP_NAME}"
+        DOCKER_REGISTRY = credentials('docker-registry-url')
+        MTA_API_KEY     = credentials('mta-api-key')
+        TL_API_KEY      = credentials('transit-land-api-key')
+        SONAR_TOKEN     = credentials('sonarqube-token')
+    }
+
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '10'))
+        timeout(time: 30, unit: 'MINUTES')
+        disableConcurrentBuilds()
+    }
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                checkout scm
+                script {
+                    env.GIT_SHA = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
+                    env.IMAGE_TAG = "${IMAGE_NAME}:${GIT_SHA}"
+                }
+                echo "Building commit: ${env.GIT_SHA}"
+            }
+        }
+
+        stage('Build') {
+            steps {
+                dir('backend/transport-tracker-bff') {
+                    sh 'mvn clean compile -q'
+                }
+            }
+        }
+
+        stage('Unit Tests') {
+            steps {
+                dir('backend/transport-tracker-bff') {
+                    sh 'mvn test -q'
+                }
+            }
+            post {
+                always {
+                    junit 'backend/transport-tracker-bff/target/surefire-reports/**/*.xml'
+                    publishHTML(target: [
+                        reportDir:   'backend/transport-tracker-bff/target/cucumber-report.html',
+                        reportFiles: 'index.html',
+                        reportName:  'BDD Report'
+                    ])
+                }
+            }
+        }
+
+        stage('Code Quality') {
+            steps {
+                dir('backend/transport-tracker-bff') {
+                    sh """
+                        mvn sonar:sonar \
+                          -Dsonar.projectKey=${APP_NAME} \
+                          -Dsonar.host.url=http://sonarqube:9000 \
+                          -Dsonar.login=${SONAR_TOKEN} \
+                          -q
+                    """
+                }
+            }
+        }
+
+        stage('Security Scan') {
+            steps {
+                dir('backend/transport-tracker-bff') {
+                    sh 'mvn org.owasp:dependency-check-maven:check -q'
+                }
+            }
+            post {
+                always {
+                    publishHTML(target: [
+                        reportDir:   'backend/transport-tracker-bff/target',
+                        reportFiles: 'dependency-check-report.html',
+                        reportName:  'OWASP Dependency Check'
+                    ])
+                }
+            }
+        }
+
+        stage('Package') {
+            steps {
+                dir('backend/transport-tracker-bff') {
+                    sh 'mvn package -DskipTests -q'
+                }
+            }
+            post {
+                success {
+                    archiveArtifacts artifacts: 'backend/transport-tracker-bff/target/*.jar'
+                }
+            }
+        }
+
+        stage('Docker Build') {
+            steps {
+                dir('backend/transport-tracker-bff') {
+                    sh "docker build -t ${env.IMAGE_TAG} -t ${IMAGE_NAME}:latest ."
+                }
+            }
+        }
+
+        stage('Docker Push') {
+            when {
+                anyOf {
+                    branch 'main'
+                    branch 'develop'
+                    branch pattern: 'release/*', comparator: 'GLOB'
+                }
+            }
+            steps {
+                sh "docker push ${env.IMAGE_TAG}"
+                sh "docker push ${IMAGE_NAME}:latest"
+            }
+        }
+
+        stage('Deploy to Dev') {
+            when { branch 'develop' }
+            steps {
+                sh """
+                    docker-compose -f docker-compose.yml \
+                      -f docker-compose.dev.yml \
+                      up -d --force-recreate bff
+                """
+                sh 'sleep 15'
+                sh 'curl -f http://localhost:8080/api/v1/health || exit 1'
+            }
+        }
+
+        stage('Deploy to Staging') {
+            when { branch 'main' }
+            input {
+                message 'Deploy to Staging?'
+                ok 'Deploy'
+            }
+            steps {
+                sh """
+                    APP_ENV=staging \
+                    IMAGE_TAG=${env.IMAGE_TAG} \
+                    docker-compose -f docker-compose.yml \
+                      -f docker-compose.staging.yml \
+                      up -d --force-recreate bff
+                """
+                sh 'sleep 20'
+                sh 'curl -f http://staging-host:8080/api/v1/health || exit 1'
+            }
+        }
+
+        stage('Deploy to Prod') {
+            when { branch 'main' }
+            input {
+                message 'Deploy to Production?'
+                ok 'Deploy'
+                submitter 'tech-lead,release-manager'
+            }
+            steps {
+                sh """
+                    APP_ENV=prod \
+                    IMAGE_TAG=${env.IMAGE_TAG} \
+                    docker-compose -f docker-compose.yml \
+                      -f docker-compose.prod.yml \
+                      up -d --force-recreate bff
+                """
+            }
+        }
+    }
+
+    post {
+        success {
+            echo "Pipeline succeeded for ${env.GIT_SHA}"
+        }
+        failure {
+            echo "Pipeline FAILED for ${env.GIT_SHA}"
+            // emailext or Slack notification hook goes here
+        }
+        always {
+            sh "docker image prune -f"
+            cleanWs()
+        }
+    }
+}

@@ -1,0 +1,14 @@
+# Dev profile — uses real MTA API keys from environment variables.
+# Set MTA_API_KEY env var before running, or pass via:
+#   mvn spring-boot:run -Dspring-boot.run.arguments="--app.transit-api.mta.api-key=YOUR_KEY"
+#
+# To force mock mode without an API key:
+#   DATA_SOURCE_MODE=MOCK mvn spring-boot:run
+
+app:
+  data-source-mode: ${DATA_SOURCE_MODE:LIVE}
+
+logging:
+  level:
+    com.tracker: DEBUG
+    org.springframework.web: DEBUG

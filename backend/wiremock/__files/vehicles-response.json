@@ -1,0 +1,32 @@
+[
+  {
+    "vehicle_id": "MTA-001",
+    "latitude": 40.7128,
+    "longitude": -74.0060,
+    "next_stop_name": "34th St - Penn Station",
+    "eta_minutes": 3,
+    "crowding_level": "MEDIUM",
+    "delay_minutes": 2,
+    "disrupted": false
+  },
+  {
+    "vehicle_id": "MTA-002",
+    "latitude": 40.7580,
+    "longitude": -73.9855,
+    "next_stop_name": "Times Square - 42nd St",
+    "eta_minutes": 8,
+    "crowding_level": "HIGH",
+    "delay_minutes": 18,
+    "disrupted": false
+  },
+  {
+    "vehicle_id": "MTA-003",
+    "latitude": 40.7489,
+    "longitude": -73.9680,
+    "next_stop_name": "Grand Central - 42nd St",
+    "eta_minutes": 12,
+    "crowding_level": "LOW",
+    "delay_minutes": 0,
+    "disrupted": true
+  }
+]

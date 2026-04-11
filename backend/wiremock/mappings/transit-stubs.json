@@ -1,0 +1,29 @@
+{
+  "mappings": [
+    {
+      "request": {
+        "method": "GET",
+        "urlPathPattern": "/vehicles",
+        "queryParameters": {
+          "route_id": { "matches": ".*" }
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": { "Content-Type": "application/json" },
+        "bodyFileName": "vehicles-response.json"
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "urlPath": "/vehicles/error"
+      },
+      "response": {
+        "status": 503,
+        "headers": { "Content-Type": "application/json" },
+        "body": "{\"error\": \"Service Unavailable\"}"
+      }
+    }
+  ]
+}

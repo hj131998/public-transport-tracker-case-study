@@ -1,0 +1,66 @@
+version: '3.9'
+
+services:
+
+  # ── BFF Gateway ─────────────────────────────────────────────────────────────
+  bff:
+    build:
+      context: ./backend/transport-tracker-bff
+      dockerfile: Dockerfile
+    image: transport-tracker/bff:latest
+    container_name: transport-tracker-bff
+    ports:
+      - "8080:8080"
+    environment:
+      APP_ENV:                  ${APP_ENV:-dev}
+      MTA_API_KEY:              ${MTA_API_KEY:-mock-mta-key}
+      TRANSIT_LAND_API_KEY:     ${TRANSIT_LAND_API_KEY:-mock-tl-key}
+      MTA_BASE_URL:             ${MTA_BASE_URL:-https://api.mta.info}
+      TRANSIT_LAND_BASE_URL:    ${TRANSIT_LAND_BASE_URL:-https://transit.land/api/v2/rest}
+      CORS_ORIGINS:             ${CORS_ORIGINS:-http://localhost:3000}
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8080/api/v1/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+    networks:
+      - tracker-net
+    restart: unless-stopped
+
+  # ── Frontend ─────────────────────────────────────────────────────────────────
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: transport-tracker/frontend:latest
+    container_name: transport-tracker-frontend
+    ports:
+      - "3000:80"
+    environment:
+      REACT_APP_API_BASE_URL: http://localhost:8080
+    depends_on:
+      bff:
+        condition: service_healthy
+    networks:
+      - tracker-net
+    restart: unless-stopped
+
+  # ── Nginx Reverse Proxy ───────────────────────────────────────────────────────
+  nginx:
+    image: nginx:1.25-alpine
+    container_name: transport-tracker-nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - frontend
+      - bff
+    networks:
+      - tracker-net
+    restart: unless-stopped
+
+networks:
+  tracker-net:
+    driver: bridge

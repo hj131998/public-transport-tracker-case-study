@@ -1,0 +1,88 @@
+spring:
+  application:
+    name: transport-tracker-bff
+  profiles:
+    active: ${APP_ENV:dev}
+
+server:
+  port: 8080
+  error:
+    include-message: always
+    include-binding-errors: always
+
+# Actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      show-details: always
+  metrics:
+    tags:
+      application: ${spring.application.name}
+
+# OpenAPI / Swagger
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: method
+
+# Resilience4j Circuit Breaker
+resilience4j:
+  circuitbreaker:
+    instances:
+      transitApi:
+        slidingWindowSize: 10
+        failureRateThreshold: 50
+        waitDurationInOpenState: 30s
+        permittedNumberOfCallsInHalfOpenState: 2
+        registerHealthIndicator: true
+  retry:
+    instances:
+      transitApi:
+        maxAttempts: 3
+        waitDuration: 500ms
+        retryExceptions:
+          - java.io.IOException
+          - org.springframework.web.reactive.function.client.WebClientRequestException
+
+# App-specific config
+app:
+  # Data source mode: LIVE | CACHED | STALE | MOCK
+  # LIVE   — call external MTA/Transit.land API, fallback to cache then mock
+  # CACHED — serve from fresh cache only, never call external API
+  # STALE  — serve stale cache only (for testing graceful degradation)
+  # MOCK   — always return mock data, skip API and cache entirely
+  data-source-mode: ${DATA_SOURCE_MODE:LIVE}
+  cache:
+    ttl-seconds: 30
+    stale-ttl-seconds: 300
+    max-size: 1000
+  transit-api:
+    mta:
+      # Free MTA GTFS-RT endpoint (no API key required)
+      # Full URL pattern: {base-url}/Dataservice/mtagtfsfeeds/nyct%2F{feedName}
+      # Example: https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/nyct%2Fgtfs-l
+      base-url: ${MTA_BASE_URL:https://api-endpoint.mta.info}
+      timeout-seconds: 10
+      # Feed paths per line group (managed by MtaFeedRegistry)
+      # nyct%2Fgtfs       (1,2,3,4,5,6,7,S)
+      # nyct%2Fgtfs-ace   (A,C,E)
+      # nyct%2Fgtfs-bdfm  (B,D,F,M)
+      # nyct%2Fgtfs-nqrw  (N,Q,R,W)
+      # nyct%2Fgtfs-l     (L)
+      # nyct%2Fgtfs-g     (G)
+      # nyct%2Fgtfs-jz    (J,Z)
+      # nyct%2Fgtfs-si    (SIR)
+    transit-land:
+      base-url: ${TRANSIT_LAND_BASE_URL:https://transit.land/api/v2/rest}
+      api-key: ${TRANSIT_LAND_API_KEY:mock-tl-key}
+      timeout-seconds: 5
+  cors:
+    allowed-origins: ${CORS_ORIGINS:http://localhost:3000}
+  rate-limit:
+    requests-per-minute: 60

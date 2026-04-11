@@ -1,0 +1,24 @@
+version: '3.9'
+
+services:
+
+  bff:
+    environment:
+      APP_ENV:               dev
+      MTA_BASE_URL:          http://wiremock:8089
+      TRANSIT_LAND_BASE_URL: http://wiremock:8089
+    depends_on:
+      - wiremock
+
+  # WireMock — simulates external transit APIs locally
+  wiremock:
+    image: wiremock/wiremock:3.5.4
+    container_name: transport-tracker-wiremock
+    ports:
+      - "8089:8089"
+    command: --port 8089 --verbose
+    volumes:
+      - ./wiremock/mappings:/home/wiremock/mappings:ro
+      - ./wiremock/__files:/home/wiremock/__files:ro
+    networks:
+      - tracker-net

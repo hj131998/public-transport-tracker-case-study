@@ -1,0 +1,39 @@
+version: '3.9'
+
+services:
+
+  bff:
+    environment:
+      APP_ENV: prod
+    deploy:
+      replicas: 2
+      resources:
+        limits:
+          memory: 768m
+          cpus: '1.0'
+        reservations:
+          memory: 512m
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 3
+    logging:
+      driver: json-file
+      options:
+        max-size: "50m"
+        max-file: "5"
+
+  frontend:
+    deploy:
+      resources:
+        limits:
+          memory: 128m
+          cpus: '0.25'
+
+  nginx:
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.prod.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/certs:/etc/nginx/certs:ro

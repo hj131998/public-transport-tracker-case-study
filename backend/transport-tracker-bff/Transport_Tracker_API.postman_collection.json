@@ -1,0 +1,786 @@
+{
+	"info": {
+		"_postman_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+		"name": "Transport Tracker BFF API",
+		"description": "Public Transport Tracker — BFF Gateway Service API Collection.\n\nCovers all REST endpoints for transit data, alerts, route planning, health checks, and actuator.\n\n**Setup:**\n1. Start the backend: `mvn spring-boot:run` (port 8080)\n2. Set the `base_url` variable if not using localhost\n3. Set `city` and `route` variables for your test scenario\n\n**MTA Subway Routes (NYC):**\n- Lines 1,2,3,4,5,6,7,S → Feed 1\n- Lines A,C,E → Feed 16\n- Lines B,D,F,M → Feed 21\n- Lines N,Q,R,W → Feed 26\n- Line L → Feed 31\n- Line G → Feed 36\n- Lines J,Z → Feed 51",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8080",
+			"type": "string"
+		},
+		{
+			"key": "city",
+			"value": "NYC",
+			"type": "string"
+		},
+		{
+			"key": "route",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "from_stop",
+			"value": "Times Sq",
+			"type": "string"
+		},
+		{
+			"key": "to_stop",
+			"value": "Brooklyn Bridge",
+			"type": "string"
+		}
+	],
+	"item": [
+		{
+			"name": "Transit Data",
+			"description": "Core transit data endpoints — aggregated response, vehicles, and alerts.",
+			"item": [
+				{
+					"name": "Get Aggregated Transit Data",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status is 200', function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('Response has required fields', function () {",
+									"    var json = pm.response.json();",
+									"    pm.expect(json).to.have.property('routeId');",
+									"    pm.expect(json).to.have.property('city');",
+									"    pm.expect(json).to.have.property('dataSource');",
+									"    pm.expect(json).to.have.property('vehicles');",
+									"    pm.expect(json).to.have.property('alerts');",
+									"    pm.expect(json).to.have.property('links');",
+									"});",
+									"",
+									"pm.test('dataSource is one of LIVE, CACHED, STALE, MOCK', function () {",
+									"    var json = pm.response.json();",
+									"    pm.expect(['LIVE','CACHED','STALE','MOCK']).to.include(json.dataSource);",
+									"});",
+									"",
+									"pm.test('vehicles is an array', function () {",
+									"    pm.expect(pm.response.json().vehicles).to.be.an('array');",
+									"});",
+									"",
+									"pm.test('HATEOAS links contain self', function () {",
+									"    pm.expect(pm.response.json().links).to.have.property('self');",
+									"});",
+									"",
+									"pm.test('Response has X-Trace-Id header', function () {",
+									"    pm.response.to.have.header('X-Trace-Id');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "X-Trace-Id",
+								"value": "{{$guid}}",
+								"description": "Optional trace ID for distributed tracing"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/transit?city={{city}}&route={{route}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "transit"],
+							"query": [
+								{ "key": "city", "value": "{{city}}", "description": "City code e.g. NYC" },
+								{ "key": "route", "value": "{{route}}", "description": "Route ID e.g. 1, A, F" }
+							]
+						},
+						"description": "Primary endpoint — returns aggregated transit data including vehicles, alerts, route plan, and HATEOAS links.\n\nFallback chain: LIVE → CACHED → STALE → MOCK"
+					}
+				},
+				{
+					"name": "Get Aggregated Transit Data (Subway A Train)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{ "key": "Accept", "value": "application/json" }
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/transit?city=NYC&route=A",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "transit"],
+							"query": [
+								{ "key": "city", "value": "NYC" },
+								{ "key": "route", "value": "A" }
+							]
+						},
+						"description": "Example: Fetch live data for the A train (ACE feed group)."
+					}
+				},
+				{
+					"name": "Get Aggregated Transit Data (Subway F Train)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{ "key": "Accept", "value": "application/json" }
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/transit?city=NYC&route=F",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "transit"],
+							"query": [
+								{ "key": "city", "value": "NYC" },
+								{ "key": "route", "value": "F" }
+							]
+						},
+						"description": "Example: Fetch live data for the F train (BDFM feed group)."
+					}
+				},
+				{
+					"name": "Get Aggregated Transit Data (Subway L Train)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{ "key": "Accept", "value": "application/json" }
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/transit?city=NYC&route=L",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "transit"],
+							"query": [
+								{ "key": "city", "value": "NYC" },
+								{ "key": "route", "value": "L" }
+							]
+						},
+						"description": "Example: Fetch live data for the L train (dedicated feed)."
+					}
+				},
+				{
+					"name": "Get Vehicle Positions",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status is 200', function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('Response is an array', function () {",
+									"    pm.expect(pm.response.json()).to.be.an('array');",
+									"});",
+									"",
+									"pm.test('Each vehicle has required fields', function () {",
+									"    var vehicles = pm.response.json();",
+									"    if (vehicles.length > 0) {",
+									"        var v = vehicles[0];",
+									"        pm.expect(v).to.have.property('vehicleId');",
+									"        pm.expect(v).to.have.property('lat');",
+									"        pm.expect(v).to.have.property('lon');",
+									"        pm.expect(v).to.have.property('nextStop');",
+									"        pm.expect(v).to.have.property('eta');",
+									"        pm.expect(v).to.have.property('crowding');",
+									"        pm.expect(v).to.have.property('delayMinutes');",
+									"        pm.expect(v).to.have.property('disrupted');",
+									"    }",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{ "key": "Accept", "value": "application/json" }
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/transit/{{route}}/vehicles?city={{city}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "transit", "{{route}}", "vehicles"],
+							"query": [
+								{ "key": "city", "value": "{{city}}" }
+							]
+						},
+						"description": "Lightweight endpoint — returns only vehicle positions for a specific route."
+					}
+				},
+				{
+					"name": "Get Alerts for Route",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status is 200', function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('Response is an array', function () {",
+									"    pm.expect(pm.response.json()).to.be.an('array');",
+									"});",
+									"",
+									"pm.test('Each alert has type, severity, message', function () {",
+									"    var alerts = pm.response.json();",
+									"    alerts.forEach(function(a) {",
+									"        pm.expect(a).to.have.property('type');",
+									"        pm.expect(a).to.have.property('severity');",
+									"        pm.expect(a).to.have.property('message');",
+									"    });",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{ "key": "Accept", "value": "application/json" }
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/transit/{{route}}/alerts?city={{city}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "transit", "{{route}}", "alerts"],
+							"query": [
+								{ "key": "city", "value": "{{city}}" }
+							]
+						},
+						"description": "Returns active alerts (DELAY, DISRUPTION, CROWDING, WEATHER) for a specific route."
+					}
+				}
+			]
+		},
+		{
+			"name": "Route Planning",
+			"description": "Route planning and alternative route endpoints.",
+			"item": [
+				{
+					"name": "Plan Route",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status is 200', function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('Response has primaryRoute', function () {",
+									"    pm.expect(pm.response.json()).to.have.property('primaryRoute');",
+									"});",
+									"",
+									"pm.test('Response has alternatives array', function () {",
+									"    pm.expect(pm.response.json().alternatives).to.be.an('array');",
+									"});",
+									"",
+									"pm.test('Response has estimatedMinutes', function () {",
+									"    pm.expect(pm.response.json()).to.have.property('estimatedMinutes');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{ "key": "Accept", "value": "application/json" }
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/routes/plan?city={{city}}&from={{from_stop}}&to={{to_stop}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "routes", "plan"],
+							"query": [
+								{ "key": "city", "value": "{{city}}" },
+								{ "key": "from", "value": "{{from_stop}}", "description": "Origin stop or area" },
+								{ "key": "to", "value": "{{to_stop}}", "description": "Destination stop or area" }
+							]
+						},
+						"description": "Plans a route between two stops. Returns primary route + up to 3 alternatives with ETAs and disruption flags."
+					}
+				},
+				{
+					"name": "Get Alternative Routes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status is 200', function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('Has alternatives', function () {",
+									"    pm.expect(pm.response.json().alternatives).to.be.an('array');",
+									"    pm.expect(pm.response.json().alternatives.length).to.be.greaterThan(0);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{ "key": "Accept", "value": "application/json" }
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/routes/{{route}}/alternatives?city={{city}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "routes", "{{route}}", "alternatives"],
+							"query": [
+								{ "key": "city", "value": "{{city}}" }
+							]
+						},
+						"description": "Returns alternative routes for a given route ID."
+					}
+				}
+			]
+		},
+		{
+			"name": "Health & Observability",
+			"description": "Health checks, readiness probes, and actuator endpoints.",
+			"item": [
+				{
+					"name": "Liveness Check",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status is 200', function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('Status is UP', function () {",
+									"    pm.expect(pm.response.json().status).to.eql('UP');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/health",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "health"]
+						},
+						"description": "Liveness probe — answers 'is the process alive?'"
+					}
+				},
+				{
+					"name": "Readiness Check",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status is 200', function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('Status is READY', function () {",
+									"    pm.expect(pm.response.json().status).to.eql('READY');",
+									"});",
+									"",
+									"pm.test('Has cacheSize field', function () {",
+									"    pm.expect(pm.response.json()).to.have.property('cacheSize');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/health/ready",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "health", "ready"]
+						},
+						"description": "Readiness probe — confirms cache is operational and service can accept traffic."
+					}
+				},
+				{
+					"name": "Actuator Health",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status is 200', function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('Has circuitBreakers health', function () {",
+									"    var json = pm.response.json();",
+									"    if (json.components && json.components.circuitBreakers) {",
+									"        pm.expect(json.components.circuitBreakers).to.have.property('status');",
+									"    }",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/actuator/health",
+							"host": ["{{base_url}}"],
+							"path": ["actuator", "health"]
+						},
+						"description": "Spring Boot Actuator health endpoint — includes circuit breaker status."
+					}
+				},
+				{
+					"name": "Actuator Metrics",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/actuator/metrics",
+							"host": ["{{base_url}}"],
+							"path": ["actuator", "metrics"]
+						},
+						"description": "Lists all available Micrometer metrics (latency, JVM, cache, etc.)."
+					}
+				},
+				{
+					"name": "Prometheus Scrape Endpoint",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/actuator/prometheus",
+							"host": ["{{base_url}}"],
+							"path": ["actuator", "prometheus"]
+						},
+						"description": "Prometheus-format metrics for scraping."
+					}
+				},
+				{
+					"name": "Actuator Info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/actuator/info",
+							"host": ["{{base_url}}"],
+							"path": ["actuator", "info"]
+						},
+						"description": "Application info endpoint."
+					}
+				}
+			]
+		},
+		{
+			"name": "API Documentation",
+			"description": "OpenAPI / Swagger endpoints.",
+			"item": [
+				{
+					"name": "OpenAPI JSON Spec",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api-docs",
+							"host": ["{{base_url}}"],
+							"path": ["api-docs"]
+						},
+						"description": "Raw OpenAPI 3.0 JSON specification."
+					}
+				},
+				{
+					"name": "Swagger UI (open in browser)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/swagger-ui.html",
+							"host": ["{{base_url}}"],
+							"path": ["swagger-ui.html"]
+						},
+						"description": "Open this URL in a browser to see the interactive Swagger UI."
+					}
+				}
+			]
+		},
+		{
+			"name": "Error Scenarios",
+			"description": "Requests that should trigger error responses — useful for testing error handling.",
+			"item": [
+				{
+					"name": "Missing city parameter → 400",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status is 400', function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test('Error response has detail field', function () {",
+									"    pm.expect(pm.response.json()).to.have.property('detail');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{ "key": "Accept", "value": "application/json" }
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/transit?route=A",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "transit"],
+							"query": [
+								{ "key": "route", "value": "A" }
+							]
+						},
+						"description": "Missing required 'city' parameter — should return 400 with ProblemDetail."
+					}
+				},
+				{
+					"name": "Missing route parameter → 400",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status is 400', function () {",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{ "key": "Accept", "value": "application/json" }
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/transit?city=NYC",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "transit"],
+							"query": [
+								{ "key": "city", "value": "NYC" }
+							]
+						},
+						"description": "Missing required 'route' parameter — should return 400."
+					}
+				},
+				{
+					"name": "Blank city parameter → 400",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status is 400', function () {",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{ "key": "Accept", "value": "application/json" }
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/transit?city=&route=A",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "transit"],
+							"query": [
+								{ "key": "city", "value": "" },
+								{ "key": "route", "value": "A" }
+							]
+						},
+						"description": "Blank city value — @NotBlank validation should reject."
+					}
+				},
+				{
+					"name": "Non-existent endpoint → 404",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status is 404', function () {",
+									"    pm.response.to.have.status(404);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/nonexistent",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "nonexistent"]
+						},
+						"description": "Request to a non-existent path — should return 404."
+					}
+				}
+			]
+		},
+		{
+			"name": "NYC Subway — All Line Groups",
+			"description": "One request per MTA feed group to verify all GTFS-RT feeds are reachable.",
+			"item": [
+				{
+					"name": "Feed 1 — Line 1 (1/2/3/4/5/6/7/S)",
+					"request": {
+						"method": "GET",
+						"header": [{ "key": "Accept", "value": "application/json" }],
+						"url": {
+							"raw": "{{base_url}}/api/v1/transit?city=NYC&route=1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "transit"],
+							"query": [
+								{ "key": "city", "value": "NYC" },
+								{ "key": "route", "value": "1" }
+							]
+						}
+					}
+				},
+				{
+					"name": "Feed 16 — Line A (A/C/E)",
+					"request": {
+						"method": "GET",
+						"header": [{ "key": "Accept", "value": "application/json" }],
+						"url": {
+							"raw": "{{base_url}}/api/v1/transit?city=NYC&route=A",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "transit"],
+							"query": [
+								{ "key": "city", "value": "NYC" },
+								{ "key": "route", "value": "A" }
+							]
+						}
+					}
+				},
+				{
+					"name": "Feed 21 — Line B (B/D/F/M)",
+					"request": {
+						"method": "GET",
+						"header": [{ "key": "Accept", "value": "application/json" }],
+						"url": {
+							"raw": "{{base_url}}/api/v1/transit?city=NYC&route=B",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "transit"],
+							"query": [
+								{ "key": "city", "value": "NYC" },
+								{ "key": "route", "value": "B" }
+							]
+						}
+					}
+				},
+				{
+					"name": "Feed 26 — Line N (N/Q/R/W)",
+					"request": {
+						"method": "GET",
+						"header": [{ "key": "Accept", "value": "application/json" }],
+						"url": {
+							"raw": "{{base_url}}/api/v1/transit?city=NYC&route=N",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "transit"],
+							"query": [
+								{ "key": "city", "value": "NYC" },
+								{ "key": "route", "value": "N" }
+							]
+						}
+					}
+				},
+				{
+					"name": "Feed 31 — Line L",
+					"request": {
+						"method": "GET",
+						"header": [{ "key": "Accept", "value": "application/json" }],
+						"url": {
+							"raw": "{{base_url}}/api/v1/transit?city=NYC&route=L",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "transit"],
+							"query": [
+								{ "key": "city", "value": "NYC" },
+								{ "key": "route", "value": "L" }
+							]
+						}
+					}
+				},
+				{
+					"name": "Feed 36 — Line G",
+					"request": {
+						"method": "GET",
+						"header": [{ "key": "Accept", "value": "application/json" }],
+						"url": {
+							"raw": "{{base_url}}/api/v1/transit?city=NYC&route=G",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "transit"],
+							"query": [
+								{ "key": "city", "value": "NYC" },
+								{ "key": "route", "value": "G" }
+							]
+						}
+					}
+				},
+				{
+					"name": "Feed 51 — Line J (J/Z)",
+					"request": {
+						"method": "GET",
+						"header": [{ "key": "Accept", "value": "application/json" }],
+						"url": {
+							"raw": "{{base_url}}/api/v1/transit?city=NYC&route=J",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "transit"],
+							"query": [
+								{ "key": "city", "value": "NYC" },
+								{ "key": "route", "value": "J" }
+							]
+						}
+					}
+				},
+				{
+					"name": "Feed 71 — Staten Island Railway",
+					"request": {
+						"method": "GET",
+						"header": [{ "key": "Accept", "value": "application/json" }],
+						"url": {
+							"raw": "{{base_url}}/api/v1/transit?city=NYC&route=SIR",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "transit"],
+							"query": [
+								{ "key": "city", "value": "NYC" },
+								{ "key": "route", "value": "SIR" }
+							]
+						}
+					}
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,10 @@
+app:
+  transit-api:
+    mta:
+      api-key: ${MTA_API_KEY}
+    transit-land:
+      api-key: ${TRANSIT_LAND_API_KEY}
+
+logging:
+  level:
+    com.tracker: INFO

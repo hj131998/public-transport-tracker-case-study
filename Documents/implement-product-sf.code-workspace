@@ -1,0 +1,20 @@
+{
+	"folders": [
+		{
+			"path": "../../AzMigration/codebase/sbr-paradox-outbound-app-az-function"
+		},
+		{
+			"path": "../../AzMigration/codebase/sbr-products-inbound-sf-app-az-function"
+		},
+		{
+			"path": "../../Mule_code/sbr-products-inbound-sf-app"
+		},
+		{
+			"path": "../../AzMigration/codebase/sbr-int-az-functions-commons"
+		}
+	],
+	"settings": {
+		"debug.internalConsoleOptions": "neverOpen",
+		"Slingshot.readFileLineLimit": 3000
+	}
+}
