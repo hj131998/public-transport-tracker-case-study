@@ -19,7 +19,7 @@
     <description>Public Transport Tracker - BFF Gateway Service</description>
 
     <properties>
-        <java.version>17</java.version>
+        <lombok.version>1.18.38</lombok.version>
         <resilience4j.version>2.2.0</resilience4j.version>
         <springdoc.version>2.5.0</springdoc.version>
         <cucumber.version>7.18.0</cucumber.version>
@@ -87,6 +87,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
             <optional>true</optional>
         </dependency>
 
@@ -167,6 +168,14 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- Netty native DNS resolver for macOS ARM64 (fixes UnsatisfiedLinkError on Apple Silicon) -->
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-resolver-dns-native-macos</artifactId>
+            <version>4.1.109.Final</version>
+            <classifier>osx-aarch_64</classifier>
+        </dependency>
+
         <!-- WireMock for integration tests -->
         <dependency>
             <groupId>org.wiremock</groupId>
@@ -178,6 +187,19 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>

@@ -39,6 +39,7 @@ public class MtaApiClient implements TransitDataProvider {
     private final MtaFeedRegistry feedRegistry;
     private final GtfsRealtimeParser parser;
     private final int timeoutSeconds;
+    private final String baseUrl;
 
     public MtaApiClient(
             ReactorClientHttpConnector connector,
@@ -50,9 +51,9 @@ public class MtaApiClient implements TransitDataProvider {
         this.feedRegistry = feedRegistry;
         this.parser = parser;
         this.timeoutSeconds = timeoutSeconds;
+        this.baseUrl = baseUrl;
         this.webClient = WebClient.builder()
                 .clientConnector(connector)
-                .baseUrl(baseUrl)
                 .defaultHeader("Accept", "application/x-protobuf, application/octet-stream, */*")
                 .build();
     }
@@ -89,8 +90,12 @@ public class MtaApiClient implements TransitDataProvider {
 
         byte[] feedBytes;
         try {
+            // Build absolute URI directly — avoids both double-encoding (%252F) from
+            // uriBuilder and the localhost:80 fallback from relative URI.create().
+            // URI.create() on a full URL preserves the already-encoded %2F as-is.
+            URI feedUri = URI.create(baseUrl + "/Dataservice/mtagtfsfeeds/" + feedPath);
             feedBytes = webClient.get()
-                    .uri(b -> b.path("/Dataservice/mtagtfsfeeds/" + feedPath).build(true))
+                    .uri(feedUri)
                     .accept(MediaType.APPLICATION_OCTET_STREAM)
                     .retrieve()
                     .bodyToMono(byte[].class)
@@ -102,17 +107,10 @@ public class MtaApiClient implements TransitDataProvider {
             throw new RuntimeException("MTA API returned " + e.getStatusCode() + " for route " + routeId, e);
         }
 
-        // Parse errors are caught here and NOT re-thrown so they do not count
-        // as circuit breaker failures — a parse issue is a data quality problem,
-        // not an API availability problem. Return empty list so TransitDataService
-        // falls through to stale cache rather than tripping the circuit.
-        try {
-            List<VehiclePosition> vehicles = parser.parse(feedBytes, routeId);
-            log.info("MTA feed={} returned {} vehicles for route={}", feedId, vehicles.size(), routeId);
-            return vehicles;
-        } catch (Exception e) {
-            log.error("GTFS-RT parse error for route={} feed={}: {}", routeId, feedId, e.getMessage());
-            return List.of();
-        }
+        // Parse errors propagate — a parse failure is unexpected and should
+        // be visible to the caller rather than silently returning empty data.
+        List<VehiclePosition> vehicles = parser.parse(feedBytes, routeId);
+        log.info("MTA feed={} returned {} vehicles for route={}", feedId, vehicles.size(), routeId);
+        return vehicles;
     }
 }

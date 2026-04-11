@@ -1,7 +1,6 @@
 package com.tracker.client.proto;
 
-import com.google.protobuf.CodedInputStream;
-import com.google.protobuf.ExtensionRegistry;
+import com.google.protobuf.ExtensionRegistryLite;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.transit.realtime.GtfsRealtime.FeedEntity;
 import com.google.transit.realtime.GtfsRealtime.FeedMessage;
@@ -104,16 +103,15 @@ public class GtfsRealtimeParser {
      */
     private FeedMessage parseFeed(byte[] feedBytes) throws InvalidProtocolBufferException {
         try {
-            return FeedMessage.parseFrom(feedBytes, ExtensionRegistry.getEmptyRegistry());
+            return FeedMessage.parseFrom(feedBytes, ExtensionRegistryLite.getEmptyRegistry());
         } catch (InvalidProtocolBufferException e) {
             log.debug("Standard parse failed ({}), retrying with discardUnknownFields", e.getMessage());
             try {
-                CodedInputStream cis = CodedInputStream.newInstance(feedBytes);
-                cis.setSizeLimit(feedBytes.length + 1024);
-                cis.setRecursionLimit(64);
-                FeedMessage.Builder builder = FeedMessage.newBuilder();
-                builder.mergeFrom(cis, ExtensionRegistry.getEmptyRegistry());
-                return builder.buildPartial();
+                FeedMessage result = FeedMessage.newBuilder()
+                        .mergeFrom(feedBytes, ExtensionRegistryLite.getEmptyRegistry())
+                        .buildPartial();
+                log.debug("Lenient parse succeeded: {} entities", result.getEntityCount());
+                return result;
             } catch (Exception fallbackEx) {
                 log.warn("Lenient parse also failed: {}", fallbackEx.getMessage());
                 throw e;
@@ -171,15 +169,18 @@ public class GtfsRealtimeParser {
 
         List<VehiclePosition> result = new ArrayList<>();
 
-        // Diagnostic: log first 5 entities to understand what MTA is actually sending
         List<FeedEntity> entities = feed.getEntityList();
-        log.info("Feed has {} total entities for route={}", entities.size(), routeId);
-        entities.stream().limit(5).forEach(e -> {
-            String eRouteId = e.hasVehicle() ? e.getVehicle().getTrip().getRouteId() : "(no-vehicle)";
-            String eTripId  = e.hasVehicle() ? e.getVehicle().getTrip().getTripId()  : "(no-vehicle)";
-            log.info("  entity id={} hasVehicle={} hasTripUpdate={} routeId='{}' tripId='{}'",
-                    e.getId(), e.hasVehicle(), e.hasTripUpdate(), eRouteId, eTripId);
-        });
+        long vehicleEntities = entities.stream().filter(FeedEntity::hasVehicle).count();
+
+        // Log distinct routeIds seen in the feed so filter mismatches are immediately visible
+        entities.stream()
+                .filter(FeedEntity::hasVehicle)
+                .map(e -> e.getVehicle().getTrip().getRouteId())
+                .distinct()
+                .forEach(id -> log.info("Feed contains routeId='{}' (requested='{}')", id, routeId));
+
+        log.info("Feed has {} total entities, {} with vehicle for requested route={}",
+                entities.size(), vehicleEntities, routeId);
 
         for (FeedEntity entity : entities) {
             if (!entity.hasVehicle()) continue;
