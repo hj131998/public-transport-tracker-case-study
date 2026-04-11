@@ -1,7 +1,6 @@
 package com.decoder;
 
 import com.decoder.client.MtaFeedClient;
-import com.decoder.client.TransitLandClient;
 import com.decoder.model.VehiclePosition;
 import com.decoder.proto.GtfsProtoDecoder;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -9,31 +8,38 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import okhttp3.OkHttpClient;
 
+import java.io.File;
+import java.time.Instant;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
 
-    public static void main(String[] args) throws Exception {
-        OkHttpClient http       = new OkHttpClient();
-        MtaFeedClient mtaClient = new MtaFeedClient(http);
-        TransitLandClient tlClient = new TransitLandClient(http);
-        GtfsProtoDecoder decoder = new GtfsProtoDecoder();
-        ObjectMapper mapper      = new ObjectMapper();
+    private static final String OUTPUT_DIR = "mta_feed_output";
 
-        // ── MTA GTFS-RT ───────────────────────────────────────────────────────
-        System.out.println("=== MTA GTFS-RT Vehicle Positions ===");
+    public static void main(String[] args) throws Exception {
+        OkHttpClient    http      = new OkHttpClient();
+        MtaFeedClient   mtaClient = new MtaFeedClient(http);
+        GtfsProtoDecoder decoder  = new GtfsProtoDecoder();
+        ObjectMapper    mapper    = new ObjectMapper();
+
+        // Create output directory
+        new File(OUTPUT_DIR).mkdirs();
+
+        System.out.println("=== MTA GTFS-RT Feed Decoder ===");
+        System.out.println("Output directory: " + OUTPUT_DIR + "/\n");
+
         for (Map.Entry<String, String> feed : MtaFeedClient.FEEDS.entrySet()) {
             String feedPath = feed.getKey();
             String lines    = feed.getValue();
+
+            System.out.printf("Fetching %-25s (lines: %s) ... ", feedPath, lines);
+
             try {
                 byte[] bytes = mtaClient.fetchFeed(feedPath);
                 List<VehiclePosition> vehicles = decoder.decode(bytes);
 
-                System.out.println("Total Vehicles: " + vehicles.size());
-                System.out.printf("feedPath=%-20s lines=%-15s vehicleCount=%d%n",
-                        feedPath, lines, vehicles.size());
-
+                // Build vehicle array
                 ArrayNode vehicleArray = mapper.createArrayNode();
                 for (VehiclePosition v : vehicles) {
                     ObjectNode node = mapper.createObjectNode();
@@ -48,26 +54,36 @@ public class Main {
                     vehicleArray.add(node);
                 }
 
+                // Build wrapper output
                 ObjectNode result = mapper.createObjectNode();
-                result.put("feed", feedPath);
-                result.put("lines", lines);
+                result.put("feedPath",     feedPath);
+                result.put("lines",        lines);
+                result.put("fetchedAtUtc", Instant.now().toString());
+                result.put("rawSizeBytes", bytes.length);
                 result.put("vehicleCount", vehicles.size());
-                result.set("vehicles", vehicleArray);
+                result.set("vehicles",     vehicleArray);
 
-//                System.out.println(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(result));
+                // Save to file — one file per feed
+                String fileName  = feedPath.replace("%2F", "_").replace("/", "_") + ".json";
+                File   outFile   = new File(OUTPUT_DIR, fileName);
+                mapper.writerWithDefaultPrettyPrinter().writeValue(outFile, result);
+
+                System.out.printf("OK  %d vehicles -> %s%n", vehicles.size(), outFile.getPath());
+
             } catch (Exception e) {
-                System.err.printf("Failed feed %s: %s%n", feedPath, e.getMessage());
+                System.err.printf("FAILED: %s%n", e.getMessage());
+
+                // Save error output so every feed has a file
+                ObjectNode errorNode = mapper.createObjectNode();
+                errorNode.put("feedPath", feedPath);
+                errorNode.put("lines",    lines);
+                errorNode.put("error",    e.getMessage());
+                String fileName = feedPath.replace("%2F", "_").replace("/", "_") + ".json";
+                mapper.writerWithDefaultPrettyPrinter()
+                      .writeValue(new File(OUTPUT_DIR, fileName), errorNode);
             }
         }
 
-        /*// ── Transit.land ──────────────────────────────────────────────────────
-        System.out.println("\n=== Transit.land Routes (NYC Subway) ===");
-        try {
-            String json = tlClient.fetchNycRoutes(20);
-            Object parsed = mapper.readValue(json, Object.class);
-            System.out.println(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(parsed));
-        } catch (Exception e) {
-            System.err.println("Transit.land failed: " + e.getMessage());
-        }*/
+        System.out.println("\nDone. Files saved to: " + new File(OUTPUT_DIR).getAbsolutePath());
     }
 }
