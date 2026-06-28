@@ -12,6 +12,8 @@ const makeVehicle = (overrides: Partial<VehiclePosition> = {}): VehiclePosition 
   crowding: 'LOW',
   delayMinutes: 0,
   disrupted: false,
+  nextStopLat: 0,
+  nextStopLon: 0,
   ...overrides,
 });
 

@@ -61,6 +61,27 @@ export default function MapView({ vehicles, selectedVehicle, onVehicleClick }: P
 
         <FlyToSelected vehicle={selectedVehicle ?? null} />
 
+        {/* Next stop marker — shown when a vehicle is selected */}
+        {selectedVehicle && selectedVehicle.nextStopLat !== 0 && selectedVehicle.nextStopLon !== 0 && (
+          <Marker
+            position={[selectedVehicle.nextStopLat, selectedVehicle.nextStopLon]}
+            icon={L.divIcon({
+              className: '',
+              html: `<div class="flex items-center justify-center w-7 h-7 rounded-full shadow-lg border-2 border-blue-600 bg-blue-50 text-xs animate-pulse">📍</div>`,
+              iconSize: [28, 28],
+              iconAnchor: [14, 14],
+            })}
+          >
+            <Popup>
+              <div className="text-sm">
+                <p className="font-bold text-blue-700">Next Stop</p>
+                <p className="text-gray-700">{selectedVehicle.nextStop.replace(/\s*\[[NS]\]$/, '')}</p>
+                <p className="text-xs text-gray-500">{selectedVehicle.eta}</p>
+              </div>
+            </Popup>
+          </Marker>
+        )}
+
         {vehicles.map((v) => (
           <Marker
             key={v.vehicleId}
@@ -69,10 +90,10 @@ export default function MapView({ vehicles, selectedVehicle, onVehicleClick }: P
             eventHandlers={{ click: () => onVehicleClick?.(v) }}
           >
             <Popup>
-              <div className="text-sm min-w-[160px]">
-                <p className="font-bold text-gray-800 mb-1">🚌 {v.vehicleId}</p>
-                <p className="text-gray-600">→ {v.nextStop}</p>
-                <p className="text-brand-700 font-semibold">ETA: {v.eta}</p>
+              <div className="text-sm min-w-[180px]">
+                <p className="font-bold text-gray-800 mb-1">{v.vehicleId}</p>
+                <p className="text-gray-600">📍 {v.nextStop.replace(/\s*\[[NS]\]$/, '')}</p>
+                <p className="text-brand-700 font-semibold mt-1">{v.eta}</p>
                 <p className={v.delayMinutes > 0 ? 'text-orange-600' : 'text-green-600'}>
                   {formatDelay(v.delayMinutes)}
                 </p>

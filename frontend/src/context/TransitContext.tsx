@@ -32,7 +32,7 @@ const initialState: TransitState = {
 function transitReducer(state: TransitState, action: TransitAction): TransitState {
   switch (action.type) {
     case 'SET_QUERY':
-      return { ...state, query: action.payload };
+      return { ...state, query: action.payload, data: null, error: null };
     case 'FETCH_START':
       return { ...state, loading: true, error: null };
     case 'FETCH_SUCCESS':

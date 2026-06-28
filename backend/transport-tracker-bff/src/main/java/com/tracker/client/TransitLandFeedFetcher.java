@@ -35,6 +35,7 @@ public class TransitLandFeedFetcher {
 
     private final WebClient webClient;
     private final int timeoutSeconds;
+    private final com.tracker.client.proto.StopNameResolver stopNameResolver;
 
     /** Route-indexed vehicle positions: city → (routeId → vehicles) */
     private final ConcurrentHashMap<String, Map<String, List<VehiclePosition>>> cityVehicleIndex =
@@ -70,8 +71,10 @@ public class TransitLandFeedFetcher {
             ReactorClientHttpConnector connector,
             @Value("${app.transit-api.transit-land.base-url}") String baseUrl,
             @Value("${app.transit-api.transit-land.api-key}") String apiKey,
-            @Value("${app.transit-api.transit-land.timeout-seconds:10}") int timeoutSeconds) {
+            @Value("${app.transit-api.transit-land.timeout-seconds:10}") int timeoutSeconds,
+            com.tracker.client.proto.StopNameResolver stopNameResolver) {
         this.timeoutSeconds = timeoutSeconds;
+        this.stopNameResolver = stopNameResolver;
         this.webClient = WebClient.builder()
                 .clientConnector(connector)
                 .baseUrl(baseUrl)
@@ -308,7 +311,7 @@ public class TransitLandFeedFetcher {
                 // Next stop
                 String stopId = String.valueOf(vehicle.getOrDefault("stopId",
                         vehicle.getOrDefault("stop_id", "")));
-                String nextStop = stopId.isEmpty() ? "In transit" : stopId;
+                String nextStop = stopId.isEmpty() ? "In transit" : stopNameResolver.resolve(stopId);
 
                 // ETA based on delay
                 String eta = delayMinutes > 0
@@ -323,6 +326,11 @@ public class TransitLandFeedFetcher {
                         vehicle.getOrDefault("current_status", "")));
                 boolean disrupted = "STOPPED_AT".equalsIgnoreCase(status) && delayMinutes > 5;
 
+                // Resolve next stop coordinates for map highlight
+                double[] nextStopCoords = stopNameResolver.getCoordinates(stopId);
+                double nextStopLat = nextStopCoords != null ? nextStopCoords[0] : 0.0;
+                double nextStopLon = nextStopCoords != null ? nextStopCoords[1] : 0.0;
+
                 VehiclePosition vp = VehiclePosition.builder()
                         .vehicleId(vehicleId)
                         .lat(lat)
@@ -332,6 +340,8 @@ public class TransitLandFeedFetcher {
                         .crowding(crowding)
                         .delayMinutes(delayMinutes)
                         .disrupted(disrupted)
+                        .nextStopLat(nextStopLat)
+                        .nextStopLon(nextStopLon)
                         .build();
 
                 index.computeIfAbsent(routeId, k -> Collections.synchronizedList(new ArrayList<>()))

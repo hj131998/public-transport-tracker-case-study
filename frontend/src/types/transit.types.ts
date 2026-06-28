@@ -12,6 +12,8 @@ export interface VehiclePosition {
   crowding: CrowdingLevel;
   delayMinutes: number;
   disrupted: boolean;
+  nextStopLat: number;
+  nextStopLon: number;
 }
 
 export interface Alert {

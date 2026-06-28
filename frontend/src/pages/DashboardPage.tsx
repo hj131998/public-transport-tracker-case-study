@@ -4,7 +4,9 @@ import AlertBanner from '../components/AlertBanner/AlertBanner';
 import VehicleList from '../components/VehicleList/VehicleList';
 import OfflineModeToggle from '../components/OfflineModeToggle/OfflineModeToggle';
 import RouteAlternatives from '../components/RouteAlternatives/RouteAlternatives';
+import SubwayRouteView from '../components/SubwayRouteView/SubwayRouteView';
 import { useTransitData } from '../hooks/useTransitData';
+import { useTransitContext } from '../context/TransitContext';
 import { VehiclePosition } from '../types/transit.types';
 
 // Lazy-load heavy map component
@@ -25,7 +27,10 @@ function SkeletonCard() {
 
 export default function DashboardPage() {
   const { data, loading, error, refetch } = useTransitData();
+  const { state } = useTransitContext();
   const [selectedVehicle, setSelectedVehicle] = useState<VehiclePosition | null>(null);
+
+  const isSubwayMode = state.query?.mode === 'SUBWAY';
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
@@ -107,14 +112,15 @@ export default function DashboardPage() {
             )}
           </div>
 
-          {/* Right column: map */}
-          <div className="lg:col-span-2">
+          {/* Right column: map (bus) or map + route diagram (subway) */}
+          <div className="lg:col-span-2 space-y-4">
+            {/* Map — shown for both modes now (subway has stop coordinates) */}
             <Suspense fallback={
-              <div className="rounded-2xl bg-gray-100 animate-pulse h-[500px] flex items-center justify-center">
+              <div className="rounded-2xl bg-gray-100 animate-pulse h-[400px] flex items-center justify-center">
                 <span className="text-gray-400 text-sm">Loading map…</span>
               </div>
             }>
-              <div className="h-[500px]">
+              <div className={isSubwayMode ? "h-[350px]" : "h-[500px]"}>
                 <MapView
                   vehicles={data.vehicles}
                   selectedVehicle={selectedVehicle}
@@ -122,14 +128,26 @@ export default function DashboardPage() {
                 />
               </div>
             </Suspense>
+
+            {/* Timeline panel — only for subway mode (shows delay/ETA details) */}
+            {isSubwayMode && (
+              <SubwayRouteView
+                vehicles={data.vehicles}
+                routeId={data.routeId}
+              />
+            )}
           </div>
         </div>
       ) : (
         /* Empty state */
         <div className="text-center py-20 text-gray-400">
-          <span className="text-6xl block mb-4">🚌</span>
+          <span className="text-6xl block mb-4">{isSubwayMode ? '🚇' : '🚌'}</span>
           <p className="text-lg font-medium text-gray-600">Search for a route to get started</p>
-          <p className="text-sm mt-1">Enter a city and route ID above to see live vehicle positions</p>
+          <p className="text-sm mt-1">
+            {isSubwayMode
+              ? 'Enter a subway line to see train arrival times and delays'
+              : 'Enter a city and route ID to see live vehicle positions'}
+          </p>
         </div>
       )}
     </div>

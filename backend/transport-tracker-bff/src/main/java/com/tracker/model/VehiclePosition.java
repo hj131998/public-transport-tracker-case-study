@@ -15,4 +15,6 @@ public class VehiclePosition {
     CrowdingLevel crowding;
     int delayMinutes;
     boolean disrupted;
+    double nextStopLat;
+    double nextStopLon;
 }

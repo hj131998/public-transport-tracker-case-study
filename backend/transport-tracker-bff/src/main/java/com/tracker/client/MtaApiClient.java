@@ -108,9 +108,16 @@ public class MtaApiClient implements TransitDataProvider {
             throw new RuntimeException("MTA API returned " + e.getStatusCode() + " for route " + routeId, e);
         }
 
-        // Parse errors propagate — a parse failure is unexpected and should
-        // be visible to the caller rather than silently returning empty data.
-        List<VehiclePosition> vehicles = parser.parse(feedBytes, routeId);
+        // For subway: use TripUpdate-based parsing (determines train position
+        // from stop arrival times since MTA subway feeds lack GPS in VehiclePosition entities)
+        List<VehiclePosition> vehicles = parser.parseFromTripUpdates(feedBytes, routeId);
+
+        // Fallback: if TripUpdate parsing returns nothing, try the VehiclePosition entities
+        if (vehicles.isEmpty()) {
+            log.debug("TripUpdate parse returned empty, trying VehiclePosition entities for route={}", routeId);
+            vehicles = parser.parse(feedBytes, routeId);
+        }
+
         log.info("MTA feed={} returned {} vehicles for route={}", feedId, vehicles.size(), routeId);
         return vehicles;
     }

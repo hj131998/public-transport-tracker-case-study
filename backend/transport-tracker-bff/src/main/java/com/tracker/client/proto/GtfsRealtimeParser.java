@@ -41,6 +41,12 @@ import java.util.Map;
 @Slf4j
 public class GtfsRealtimeParser {
 
+    private final StopNameResolver stopNameResolver;
+
+    public GtfsRealtimeParser(StopNameResolver stopNameResolver) {
+        this.stopNameResolver = stopNameResolver;
+    }
+
     /**
      * Entry point. Accepts raw protobuf bytes from the MTA HTTP response.
      *
@@ -290,5 +296,253 @@ public class GtfsRealtimeParser {
         boolean stoppedAtStation = vp.getCurrentStatus() ==
                 com.google.transit.realtime.GtfsRealtime.VehiclePosition.VehicleStopStatus.STOPPED_AT;
         return stoppedAtStation && delayMinutes > 5;
+    }
+
+    /**
+     * Builds a user-friendly train label from the route ID, direction, and trip ID.
+     *
+     * MTA subway trip IDs follow the pattern: "136200_L..N" where:
+     *   - 136200 = encoded departure time
+     *   - L = route
+     *   - N/S = direction (north/south)
+     *
+     * Each route has known terminal stations per direction.
+     * We map these to produce labels like "L → 8 Av" or "A → Inwood-207 St"
+     */
+    private String buildTrainLabel(String routeId, String direction, String tripId) {
+        String headsign = getHeadsign(routeId, direction);
+        // Extract a short unique suffix from tripId (e.g., "136200_L..N" → "136200")
+        String shortId = "";
+        if (tripId != null && !tripId.isEmpty()) {
+            // Take first numeric segment before underscore
+            int underscoreIdx = tripId.indexOf('_');
+            shortId = underscoreIdx > 0 ? tripId.substring(0, Math.min(6, underscoreIdx)) : tripId.substring(0, Math.min(6, tripId.length()));
+        }
+        if (headsign != null) {
+            return routeId + " → " + headsign + " #" + shortId;
+        }
+        return routeId + " Train #" + shortId;
+    }
+
+    /**
+     * Returns the terminal station name for a route + direction combination.
+     * Data from MTA static GTFS trips.txt trip_headsign field.
+     */
+    private String getHeadsign(String routeId, String direction) {
+        if (routeId == null) return null;
+        boolean north = "N".equals(direction);
+        return switch (routeId.toUpperCase()) {
+            case "1" -> north ? "Van Cortlandt Park-242 St" : "South Ferry";
+            case "2" -> north ? "Wakefield-241 St" : "Flatbush Av";
+            case "3" -> north ? "Harlem-148 St" : "New Lots Av";
+            case "4" -> north ? "Woodlawn" : "Crown Hts-Utica Av";
+            case "5" -> north ? "Eastchester-Dyre Av" : "Flatbush Av";
+            case "6" -> north ? "Pelham Bay Park" : "Brooklyn Bridge";
+            case "7" -> north ? "Flushing-Main St" : "34 St-Hudson Yards";
+            case "A" -> north ? "Inwood-207 St" : "Far Rockaway";
+            case "B" -> north ? "Bedford Park Blvd" : "Brighton Beach";
+            case "C" -> north ? "168 St" : "Euclid Av";
+            case "D" -> north ? "Norwood-205 St" : "Coney Island";
+            case "E" -> north ? "Jamaica Center" : "World Trade Center";
+            case "F" -> north ? "Jamaica-179 St" : "Coney Island";
+            case "G" -> north ? "Court Sq" : "Church Av";
+            case "J" -> north ? "Broad St" : "Jamaica Center";
+            case "L" -> north ? "8 Av" : "Canarsie-Rockaway Pkwy";
+            case "M" -> north ? "Forest Hills-71 Av" : "Middle Village";
+            case "N" -> north ? "Astoria-Ditmars Blvd" : "Coney Island";
+            case "Q" -> north ? "96 St" : "Coney Island";
+            case "R" -> north ? "Forest Hills-71 Av" : "Bay Ridge-95 St";
+            case "S" -> north ? "Times Sq-42 St" : "Grand Central-42 St";
+            case "W" -> north ? "Astoria-Ditmars Blvd" : "Whitehall St";
+            case "Z" -> north ? "Broad St" : "Jamaica Center";
+            default -> null;
+        };
+    }
+
+    // ═══════════════════════════════════════════════════════════════════════
+    // SUBWAY MODE: Parse TripUpdate entities to determine train positions
+    // ═══════════════════════════════════════════════════════════════════════
+
+    /**
+     * Parses TripUpdate entities from the MTA feed to determine where each
+     * subway train currently is in its stop sequence.
+     *
+     * MTA subway feeds primarily contain TripUpdate entities (not VehiclePosition).
+     * Each TripUpdate lists upcoming stop arrival times for a specific trip.
+     * By comparing these times to the current timestamp, we can determine
+     * which stop the train just left and which stop it's approaching.
+     *
+     * Logic per trip:
+     *   1. Get the list of StopTimeUpdates (ordered by stop sequence)
+     *   2. Find the first stop where arrival.time > now → that's the NEXT stop
+     *   3. All stops before that have been passed
+     *   4. The train is between the last passed stop and the next stop
+     *   5. ETA = next stop arrival time - now
+     *   6. Delay = the delay field on the next stop's arrival
+     *
+     * @param feedBytes raw protobuf from MTA
+     * @param routeId   subway line (e.g., "L", "A", "1")
+     * @return list of VehiclePosition objects positioned at their current/next stop
+     */
+    public List<VehiclePosition> parseFromTripUpdates(byte[] feedBytes, String routeId) {
+        if (feedBytes == null || feedBytes.length == 0) {
+            log.warn("Empty feed bytes for TripUpdate parse, route={}", routeId);
+            return List.of();
+        }
+
+        try {
+            FeedMessage feed = parseFeed(feedBytes);
+            long nowEpoch = Instant.now().getEpochSecond();
+
+            log.debug("Parsing TripUpdates: {} entities, looking for route={}",
+                    feed.getEntityCount(), routeId);
+
+            List<VehiclePosition> results = new ArrayList<>();
+
+            for (FeedEntity entity : feed.getEntityList()) {
+                if (!entity.hasTripUpdate()) continue;
+
+                TripUpdate tu = entity.getTripUpdate();
+                String tripRouteId = tu.getTrip().getRouteId();
+
+                // Filter by route
+                if (!routeId.equalsIgnoreCase(tripRouteId)) continue;
+
+                // Extract train position from stop time updates
+                VehiclePosition vp = extractTrainPosition(tu, entity.getId(), nowEpoch);
+                if (vp != null) {
+                    results.add(vp);
+                }
+            }
+
+            log.info("TripUpdate parse: route={} active_trains={}", routeId, results.size());
+            return results;
+
+        } catch (Exception e) {
+            log.error("Failed to parse TripUpdates for route={}: {}", routeId, e.getMessage());
+            throw new RuntimeException("TripUpdate parse failure for route " + routeId, e);
+        }
+    }
+
+    /**
+     * Determines where a train is based on its TripUpdate stop time predictions.
+     *
+     * Finds the boundary between "already passed" and "upcoming" stops:
+     *   - Passed stops: arrival.time < now (or arrival.time == 0 meaning imminent)
+     *   - Next stop: first stop where arrival.time > now
+     *   - ETA: seconds until arrival at next stop
+     */
+    private VehiclePosition extractTrainPosition(TripUpdate tu, String entityId, long nowEpoch) {
+        List<StopTimeUpdate> stopUpdates = tu.getStopTimeUpdateList();
+        if (stopUpdates.isEmpty()) return null;
+
+        String tripId = tu.getTrip().getTripId();
+
+        // Find current stop (last passed) and next TWO future stops
+        String currentStopId = null;
+        String nextStopId = null;
+        long nextArrivalTime = 0;
+        int nextDelaySec = 0;
+        String secondStopId = null;
+        long secondArrivalTime = 0;
+
+        boolean foundNext = false;
+        for (StopTimeUpdate stu : stopUpdates) {
+            long arrivalTime = stu.hasArrival() ? stu.getArrival().getTime() : 0;
+            int stopDelay = stu.hasArrival() ? stu.getArrival().getDelay() : 0;
+
+            if (arrivalTime > nowEpoch) {
+                if (!foundNext) {
+                    // First future stop
+                    nextStopId = stu.getStopId();
+                    nextArrivalTime = arrivalTime;
+                    nextDelaySec = stopDelay;
+                    foundNext = true;
+                } else if (secondStopId == null) {
+                    // Second future stop
+                    secondStopId = stu.getStopId();
+                    secondArrivalTime = arrivalTime;
+                    break;
+                }
+            } else {
+                currentStopId = stu.getStopId();
+            }
+        }
+
+        // Fallbacks
+        if (nextStopId == null) {
+            if (currentStopId == null) return null;
+            nextStopId = currentStopId;
+            nextDelaySec = 0;
+        }
+        if (currentStopId == null) {
+            currentStopId = stopUpdates.get(0).getStopId();
+        }
+
+        // Resolve names
+        String currentStopName = stopNameResolver.resolve(currentStopId);
+        String nextStopName = stopNameResolver.resolve(nextStopId);
+
+        // If current and next resolve to the same name (same station, different platform),
+        // use the SECOND future stop for the ETA display
+        String etaStopName = nextStopName;
+        long etaArrivalTime = nextArrivalTime;
+        if (currentStopName.equals(nextStopName) && secondStopId != null) {
+            etaStopName = stopNameResolver.resolve(secondStopId);
+            etaArrivalTime = secondArrivalTime;
+        }
+
+        // ETA calculation
+        int etaSeconds = (int) (etaArrivalTime - nowEpoch);
+        int etaMinutes = Math.max(0, (int) Math.ceil(etaSeconds / 60.0));
+        int delayMinutes = (int) Math.round(nextDelaySec / 60.0);
+
+        // ETA string: shows where the train is GOING next (different from current)
+        String eta;
+        if (etaSeconds <= 0 || currentStopName.equals(etaStopName)) {
+            eta = "Departing → " + etaStopName;
+        } else if (etaMinutes <= 1) {
+            eta = "Next: " + etaStopName + " (< 1 min)";
+        } else {
+            eta = "Next: " + etaStopName + " (" + etaMinutes + " min)";
+        }
+        if (delayMinutes > 0) {
+            eta += " • +" + delayMinutes + " delay";
+        }
+
+        boolean disrupted = delayMinutes > 5;
+
+        // Direction from next stop ID suffix
+        String dirSuffix = nextStopId.length() > 0
+                ? nextStopId.substring(nextStopId.length() - 1) : "";
+
+        // Display: current station + direction tag
+        String displayStop = currentStopName + (dirSuffix.equals("N") || dirSuffix.equals("S")
+                ? " [" + dirSuffix + "]" : "");
+
+        // Position at current stop
+        double[] coords = stopNameResolver.getCoordinates(currentStopId);
+        double lat = coords != null ? coords[0] : 0.0;
+        double lon = coords != null ? coords[1] : 0.0;
+
+        String vehicleLabel = buildTrainLabel(tu.getTrip().getRouteId(), dirSuffix, tripId);
+
+        // Resolve next stop coordinates for map highlight
+        double[] nextCoords = stopNameResolver.getCoordinates(nextStopId);
+        double nextStopLat = nextCoords != null ? nextCoords[0] : 0.0;
+        double nextStopLon = nextCoords != null ? nextCoords[1] : 0.0;
+
+        return VehiclePosition.builder()
+                .vehicleId(vehicleLabel)
+                .lat(lat)
+                .lon(lon)
+                .nextStop(displayStop)
+                .eta(eta)
+                .crowding(CrowdingLevel.LOW)
+                .delayMinutes(delayMinutes)
+                .disrupted(disrupted)
+                .nextStopLat(nextStopLat)
+                .nextStopLon(nextStopLon)
+                .build();
     }
 }
