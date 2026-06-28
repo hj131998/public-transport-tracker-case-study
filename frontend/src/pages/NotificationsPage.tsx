@@ -1,4 +1,3 @@
-import React from 'react';
 import NotificationPanel from '../components/NotificationPanel/NotificationPanel';
 
 export default function NotificationsPage() {

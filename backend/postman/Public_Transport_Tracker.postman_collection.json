@@ -1,0 +1,536 @@
+{
+  "info": {
+    "name": "Public Transport Tracker - External & Internal APIs",
+    "_postman_id": "ptt-collection-2024",
+    "description": "Postman collection covering:\n1. External Transit APIs (MTA GTFS-RT, Transit.land) - the upstream data sources\n2. Internal BFF API endpoints - what our backend exposes to the frontend\n\nUse this to understand the data flow from external sources through our BFF to the frontend.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "transit_land_api_key",
+      "value": "BHJjJDbxPohf0MzTGO2iIyWIoWtSGzOn",
+      "type": "string"
+    },
+    {
+      "key": "transit_land_base_url",
+      "value": "https://transit.land/api/v2/rest",
+      "type": "string"
+    },
+    {
+      "key": "mta_base_url",
+      "value": "https://api-endpoint.mta.info",
+      "type": "string"
+    },
+    {
+      "key": "bff_base_url",
+      "value": "http://localhost:8080",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. External APIs - Transit.land",
+      "description": "Direct calls to Transit.land REST API v2. These are the endpoints our TransitLandClient calls internally.",
+      "item": [
+        {
+          "name": "1.1 List GTFS-RT Feeds (Discover available feeds)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{transit_land_base_url}}/feeds?spec=gtfs-rt&apikey={{transit_land_api_key}}",
+              "host": ["{{transit_land_base_url}}"],
+              "path": ["feeds"],
+              "query": [
+                { "key": "spec", "value": "gtfs-rt" },
+                { "key": "apikey", "value": "{{transit_land_api_key}}" }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "1.2 NYC Bus - Vehicle Positions (Real GPS)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "description": "Fetches real-time vehicle positions for NYC MTA buses. This is the primary endpoint our TransitLandClient calls. Returns GTFS-RT data as JSON with actual lat/lon GPS coordinates for every active bus.",
+            "url": {
+              "raw": "{{transit_land_base_url}}/feeds/f-mta~nyc~rt~bustime/download_latest_rt/vehicle_positions.json?apikey={{transit_land_api_key}}",
+              "host": ["{{transit_land_base_url}}"],
+              "path": ["feeds", "f-mta~nyc~rt~bustime", "download_latest_rt", "vehicle_positions.json"],
+              "query": [
+                { "key": "apikey", "value": "{{transit_land_api_key}}" }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "1.3 NYC Bus - Trip Updates (Delays/ETAs)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "description": "Fetches trip updates (arrival predictions, delays) for NYC MTA buses via Transit.land.",
+            "url": {
+              "raw": "{{transit_land_base_url}}/feeds/f-mta~nyc~rt~bustime/download_latest_rt/trip_updates.json?apikey={{transit_land_api_key}}",
+              "host": ["{{transit_land_base_url}}"],
+              "path": ["feeds", "f-mta~nyc~rt~bustime", "download_latest_rt", "trip_updates.json"],
+              "query": [
+                { "key": "apikey", "value": "{{transit_land_api_key}}" }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "1.4 NYC Bus - Service Alerts",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "description": "Fetches active service alerts for NYC MTA buses via Transit.land.",
+            "url": {
+              "raw": "{{transit_land_base_url}}/feeds/f-mta~nyc~rt~bustime/download_latest_rt/alerts.json?apikey={{transit_land_api_key}}",
+              "host": ["{{transit_land_base_url}}"],
+              "path": ["feeds", "f-mta~nyc~rt~bustime", "download_latest_rt", "alerts.json"],
+              "query": [
+                { "key": "apikey", "value": "{{transit_land_api_key}}" }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "1.5 Chicago CTA - Vehicle Positions",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "description": "Real-time vehicle positions for Chicago CTA buses/trains with GPS.",
+            "url": {
+              "raw": "{{transit_land_base_url}}/feeds/f-dp3-cta~rt/download_latest_rt/vehicle_positions.json?apikey={{transit_land_api_key}}",
+              "host": ["{{transit_land_base_url}}"],
+              "path": ["feeds", "f-dp3-cta~rt", "download_latest_rt", "vehicle_positions.json"],
+              "query": [
+                { "key": "apikey", "value": "{{transit_land_api_key}}" }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "1.6 Portland TriMet - Vehicle Positions",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "description": "Real-time vehicle positions for Portland TriMet buses and MAX light rail.",
+            "url": {
+              "raw": "{{transit_land_base_url}}/feeds/f-c20-trimet~rt/download_latest_rt/vehicle_positions.json?apikey={{transit_land_api_key}}",
+              "host": ["{{transit_land_base_url}}"],
+              "path": ["feeds", "f-c20-trimet~rt", "download_latest_rt", "vehicle_positions.json"],
+              "query": [
+                { "key": "apikey", "value": "{{transit_land_api_key}}" }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "1.7 SF MUNI - Vehicle Positions",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "description": "Real-time vehicle positions for San Francisco MUNI buses and streetcars.",
+            "url": {
+              "raw": "{{transit_land_base_url}}/feeds/f-9q8y-sfmta~rt/download_latest_rt/vehicle_positions.json?apikey={{transit_land_api_key}}",
+              "host": ["{{transit_land_base_url}}"],
+              "path": ["feeds", "f-9q8y-sfmta~rt", "download_latest_rt", "vehicle_positions.json"],
+              "query": [
+                { "key": "apikey", "value": "{{transit_land_api_key}}" }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "1.8 Transit.land - Get Feed Details (inspect a feed)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "description": "Get metadata about a specific GTFS-RT feed registered in Transit.land. Useful to see what RT types are available (vehicle_positions, trip_updates, alerts).",
+            "url": {
+              "raw": "{{transit_land_base_url}}/feeds/f-mta~nyc~rt~bustime?apikey={{transit_land_api_key}}",
+              "host": ["{{transit_land_base_url}}"],
+              "path": ["feeds", "f-mta~nyc~rt~bustime"],
+              "query": [
+                { "key": "apikey", "value": "{{transit_land_api_key}}" }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "2. External APIs - MTA GTFS-RT (Subway)",
+      "description": "Direct calls to MTA's free GTFS-RT protobuf endpoint. These are the endpoints our MtaApiClient calls. NOTE: Response is binary protobuf — Postman will show raw bytes. Use the Transit.land JSON proxy above for readable output.",
+      "item": [
+        {
+          "name": "2.1 MTA Subway Feed - Lines 1,2,3,4,5,6,7,S",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/x-protobuf" }
+            ],
+            "description": "GTFS-RT protobuf feed for NYC subway lines 1-7 and S. Response is binary protobuf (not human-readable in Postman). Contains TripUpdate entities with delay info but vehicle positions have lat=0, lon=0.",
+            "url": {
+              "raw": "{{mta_base_url}}/Dataservice/mtagtfsfeeds/nyct%2Fgtfs",
+              "host": ["{{mta_base_url}}"],
+              "path": ["Dataservice", "mtagtfsfeeds", "nyct%2Fgtfs"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "2.2 MTA Subway Feed - Lines A,C,E",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/x-protobuf" }
+            ],
+            "description": "GTFS-RT protobuf feed for NYC subway lines A, C, E.",
+            "url": {
+              "raw": "{{mta_base_url}}/Dataservice/mtagtfsfeeds/nyct%2Fgtfs-ace",
+              "host": ["{{mta_base_url}}"],
+              "path": ["Dataservice", "mtagtfsfeeds", "nyct%2Fgtfs-ace"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "2.3 MTA Subway Feed - Lines B,D,F,M",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/x-protobuf" }
+            ],
+            "url": {
+              "raw": "{{mta_base_url}}/Dataservice/mtagtfsfeeds/nyct%2Fgtfs-bdfm",
+              "host": ["{{mta_base_url}}"],
+              "path": ["Dataservice", "mtagtfsfeeds", "nyct%2Fgtfs-bdfm"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "2.4 MTA Subway Feed - Lines N,Q,R,W",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/x-protobuf" }
+            ],
+            "url": {
+              "raw": "{{mta_base_url}}/Dataservice/mtagtfsfeeds/nyct%2Fgtfs-nqrw",
+              "host": ["{{mta_base_url}}"],
+              "path": ["Dataservice", "mtagtfsfeeds", "nyct%2Fgtfs-nqrw"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "2.5 MTA Subway Feed - Line L",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/x-protobuf" }
+            ],
+            "url": {
+              "raw": "{{mta_base_url}}/Dataservice/mtagtfsfeeds/nyct%2Fgtfs-l",
+              "host": ["{{mta_base_url}}"],
+              "path": ["Dataservice", "mtagtfsfeeds", "nyct%2Fgtfs-l"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "2.6 MTA Subway Feed - Line G",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/x-protobuf" }
+            ],
+            "url": {
+              "raw": "{{mta_base_url}}/Dataservice/mtagtfsfeeds/nyct%2Fgtfs-g",
+              "host": ["{{mta_base_url}}"],
+              "path": ["Dataservice", "mtagtfsfeeds", "nyct%2Fgtfs-g"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "2.7 MTA Subway Feed - Lines J,Z",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/x-protobuf" }
+            ],
+            "url": {
+              "raw": "{{mta_base_url}}/Dataservice/mtagtfsfeeds/nyct%2Fgtfs-jz",
+              "host": ["{{mta_base_url}}"],
+              "path": ["Dataservice", "mtagtfsfeeds", "nyct%2Fgtfs-jz"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "3. Internal BFF API (Our Backend)",
+      "description": "These are the endpoints our Spring Boot BFF exposes. The frontend calls these. The BFF internally calls MTA + Transit.land, applies the degradation chain, generates alerts, and returns aggregated responses.",
+      "item": [
+        {
+          "name": "3.1 Aggregated Transit Data (Main Endpoint)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "description": "Primary endpoint. Returns aggregated response: vehicles + alerts + route plan + HATEOAS links. The BFF calls MTA/Transit.land internally, applies cache/fallback logic, and returns unified JSON.",
+            "url": {
+              "raw": "{{bff_base_url}}/api/v1/transit?city=NYC&route=M15",
+              "host": ["{{bff_base_url}}"],
+              "path": ["api", "v1", "transit"],
+              "query": [
+                { "key": "city", "value": "NYC" },
+                { "key": "route", "value": "M15" }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "3.2 Vehicle Positions for Route",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "description": "Returns just the vehicle positions for a specific route. Useful for map-only views.",
+            "url": {
+              "raw": "{{bff_base_url}}/api/v1/transit/M15/vehicles?city=NYC",
+              "host": ["{{bff_base_url}}"],
+              "path": ["api", "v1", "transit", "M15", "vehicles"],
+              "query": [
+                { "key": "city", "value": "NYC" }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "3.3 Alerts for Route",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "description": "Returns conditional alerts generated by AlertService based on current vehicle data (delays, disruptions, crowding, weather).",
+            "url": {
+              "raw": "{{bff_base_url}}/api/v1/transit/M15/alerts?city=NYC",
+              "host": ["{{bff_base_url}}"],
+              "path": ["api", "v1", "transit", "M15", "alerts"],
+              "query": [
+                { "key": "city", "value": "NYC" }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "3.4 Route Planning",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "description": "Returns route plan with primary route + up to 3 alternatives. Factors in current vehicle delays for estimated journey time.",
+            "url": {
+              "raw": "{{bff_base_url}}/api/v1/routes/plan?city=NYC&from=Times Square&to=Union Square",
+              "host": ["{{bff_base_url}}"],
+              "path": ["api", "v1", "routes", "plan"],
+              "query": [
+                { "key": "city", "value": "NYC" },
+                { "key": "from", "value": "Times Square" },
+                { "key": "to", "value": "Union Square" }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "3.5 Route Alternatives",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "description": "Returns alternative routes for a given route ID.",
+            "url": {
+              "raw": "{{bff_base_url}}/api/v1/routes/M15/alternatives?city=NYC",
+              "host": ["{{bff_base_url}}"],
+              "path": ["api", "v1", "routes", "M15", "alternatives"],
+              "query": [
+                { "key": "city", "value": "NYC" }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "3.6 Health Check (Liveness)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "description": "Liveness probe. Returns UP if the service is running.",
+            "url": {
+              "raw": "{{bff_base_url}}/api/v1/health",
+              "host": ["{{bff_base_url}}"],
+              "path": ["api", "v1", "health"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "3.7 Readiness Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "description": "Readiness probe. Confirms cache is operational and returns cache size.",
+            "url": {
+              "raw": "{{bff_base_url}}/api/v1/health/ready",
+              "host": ["{{bff_base_url}}"],
+              "path": ["api", "v1", "health", "ready"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "3.8 Actuator Metrics",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "description": "Micrometer metrics endpoint — shows JVM, HTTP, cache, circuit breaker metrics.",
+            "url": {
+              "raw": "{{bff_base_url}}/actuator/metrics",
+              "host": ["{{bff_base_url}}"],
+              "path": ["actuator", "metrics"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "3.9 Prometheus Scrape Endpoint",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "description": "Prometheus-format metrics for scraping. Used by Prometheus container in staging/prod.",
+            "url": {
+              "raw": "{{bff_base_url}}/actuator/prometheus",
+              "host": ["{{bff_base_url}}"],
+              "path": ["actuator", "prometheus"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "3.10 Circuit Breaker Status",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "description": "Shows current state of Resilience4j circuit breakers (CLOSED/OPEN/HALF_OPEN) and failure rates.",
+            "url": {
+              "raw": "{{bff_base_url}}/actuator/circuitbreakers",
+              "host": ["{{bff_base_url}}"],
+              "path": ["actuator", "circuitbreakers"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "3.11 Swagger UI (Open in Browser)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "description": "OpenAPI/Swagger UI. Open this URL in a browser to see interactive API docs.",
+            "url": {
+              "raw": "{{bff_base_url}}/swagger-ui.html",
+              "host": ["{{bff_base_url}}"],
+              "path": ["swagger-ui.html"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "3.12 Validation Error - Missing City Param",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "description": "Tests error handling: missing required 'city' parameter should return HTTP 400 with ProblemDetail JSON.",
+            "url": {
+              "raw": "{{bff_base_url}}/api/v1/transit?route=M15",
+              "host": ["{{bff_base_url}}"],
+              "path": ["api", "v1", "transit"],
+              "query": [
+                { "key": "route", "value": "M15" }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "3.13 Transit Data - Subway Route (L train)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "description": "Fetches subway data. MTA subway has no GPS — positions will be 0,0 or fallback to Transit.land/mock. Demonstrates graceful degradation.",
+            "url": {
+              "raw": "{{bff_base_url}}/api/v1/transit?city=NYC&route=L",
+              "host": ["{{bff_base_url}}"],
+              "path": ["api", "v1", "transit"],
+              "query": [
+                { "key": "city", "value": "NYC" },
+                { "key": "route", "value": "L" }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "3.14 Transit Data - Chicago CTA",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "description": "Fetches transit data for Chicago. Uses Transit.land as provider — should return real GPS positions.",
+            "url": {
+              "raw": "{{bff_base_url}}/api/v1/transit?city=CHICAGO&route=22",
+              "host": ["{{bff_base_url}}"],
+              "path": ["api", "v1", "transit"],
+              "query": [
+                { "key": "city", "value": "CHICAGO" },
+                { "key": "route", "value": "22" }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "3.15 Transit Data - Portland TriMet",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "description": "Fetches transit data for Portland. Uses Transit.land — real GPS bus/MAX positions.",
+            "url": {
+              "raw": "{{bff_base_url}}/api/v1/transit?city=PORTLAND&route=72",
+              "host": ["{{bff_base_url}}"],
+              "path": ["api", "v1", "transit"],
+              "query": [
+                { "key": "city", "value": "PORTLAND" },
+                { "key": "route", "value": "72" }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

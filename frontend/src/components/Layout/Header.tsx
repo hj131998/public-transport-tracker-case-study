@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useOfflineMode } from '../../hooks/useOfflineMode';
 import { useNotifications } from '../../hooks/useNotifications';

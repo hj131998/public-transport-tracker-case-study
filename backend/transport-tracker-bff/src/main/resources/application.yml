@@ -3,6 +3,9 @@ spring:
     name: transport-tracker-bff
   profiles:
     active: ${APP_ENV:dev}
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
 
 server:
   port: 8080
@@ -82,7 +85,7 @@ app:
       # nyct%2Fgtfs-si    (SIR)
     transit-land:
       base-url: ${TRANSIT_LAND_BASE_URL:https://transit.land/api/v2/rest}
-      api-key: ${TRANSIT_LAND_API_KEY:mock-tl-key}
+      api-key: ${TRANSIT_LAND_API_KEY:BHJjJDbxPohf0MzTGO2iIyWIoWtSGzOn}
       timeout-seconds: 5
   cors:
     allowed-origins: ${CORS_ORIGINS:http://localhost:3000}

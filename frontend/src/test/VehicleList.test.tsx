@@ -1,8 +1,7 @@
-import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
-import VehicleList from '../../components/VehicleList/VehicleList';
-import { VehiclePosition } from '../../types/transit.types';
+import VehicleList from '../components/VehicleList/VehicleList';
+import { VehiclePosition } from '../types/transit.types';
 
 const makeVehicle = (overrides: Partial<VehiclePosition> = {}): VehiclePosition => ({
   vehicleId: 'V001',
@@ -58,10 +57,43 @@ describe('VehicleList', () => {
 
   it('highlights selected vehicle', () => {
     const vehicle = makeVehicle({ vehicleId: 'V001' });
-    const { container } = render(
-      <VehicleList vehicles={[vehicle]} selectedId="V001" />
-    );
-    const card = container.querySelector('button');
+    render(<VehicleList vehicles={[vehicle]} selectedId="V001" />);
+    const card = screen.getByText('V001').closest('button');
     expect(card?.className).toContain('border-brand-500');
+  });
+
+  it('sort by delay reorders vehicles by descending delay', () => {
+    const vehicles = [
+      makeVehicle({ vehicleId: 'V001', delayMinutes: 2, eta: '3 min' }),
+      makeVehicle({ vehicleId: 'V002', delayMinutes: 18, eta: '3 min' }),
+      makeVehicle({ vehicleId: 'V003', delayMinutes: 5, eta: '3 min' }),
+    ];
+    render(<VehicleList vehicles={vehicles} />);
+
+    // Target the sort button specifically by its text content
+    const sortButtons = screen.getAllByText('delay');
+    const sortButton = sortButtons.find(el => el.tagName === 'BUTTON' && el.className.includes('rounded-full'));
+    fireEvent.click(sortButton!);
+
+    const cards = screen.getAllByText(/^V00\d$/);
+    expect(cards[0].textContent).toBe('V002');
+    expect(cards[1].textContent).toBe('V003');
+    expect(cards[2].textContent).toBe('V001');
+  });
+
+  it('sort by crowding reorders vehicles HIGH first', () => {
+    const vehicles = [
+      makeVehicle({ vehicleId: 'V001', crowding: 'LOW' }),
+      makeVehicle({ vehicleId: 'V002', crowding: 'HIGH' }),
+      makeVehicle({ vehicleId: 'V003', crowding: 'MEDIUM' }),
+    ];
+    render(<VehicleList vehicles={vehicles} />);
+
+    fireEvent.click(screen.getByRole('button', { name: /crowding/i }));
+
+    const cards = screen.getAllByText(/^V00\d$/);
+    expect(cards[0].textContent).toBe('V002');
+    expect(cards[1].textContent).toBe('V003');
+    expect(cards[2].textContent).toBe('V001');
   });
 });

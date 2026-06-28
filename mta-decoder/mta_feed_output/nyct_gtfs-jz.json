@@ -1,0 +1,2892 @@
+{
+  "feedPath" : "nyct%2Fgtfs-jz",
+  "lines" : "J,Z",
+  "fetchedAtUtc" : "2026-04-11T14:09:01.826442300Z",
+  "rawSizeBytes" : 19769,
+  "vehicleCount" : 24,
+  "tripUpdateCount" : 24,
+  "alertCount" : 0,
+  "vehicles" : [ {
+    "entityId" : "000002J",
+    "routeId" : "J",
+    "tripId" : "057500_J..N40X003",
+    "latitude" : 0.0,
+    "longitude" : 0.0,
+    "bearing" : 0.0,
+    "status" : "STOPPED_AT",
+    "timestamp" : 1775916522
+  }, {
+    "entityId" : "000004J",
+    "routeId" : "J",
+    "tripId" : "058350_J..S12X006",
+    "latitude" : 0.0,
+    "longitude" : 0.0,
+    "bearing" : 0.0,
+    "status" : "STOPPED_AT",
+    "timestamp" : 1775916532
+  }, {
+    "entityId" : "000006J",
+    "routeId" : "J",
+    "tripId" : "059150_J..S12X006",
+    "latitude" : 0.0,
+    "longitude" : 0.0,
+    "bearing" : 0.0,
+    "status" : "STOPPED_AT",
+    "timestamp" : 1775916492
+  }, {
+    "entityId" : "000008J",
+    "routeId" : "J",
+    "tripId" : "058500_J..N40X003",
+    "latitude" : 0.0,
+    "longitude" : 0.0,
+    "bearing" : 0.0,
+    "status" : "STOPPED_AT",
+    "timestamp" : 1775916532
+  }, {
+    "entityId" : "000010J",
+    "routeId" : "J",
+    "tripId" : "059500_J..N40X003",
+    "latitude" : 0.0,
+    "longitude" : 0.0,
+    "bearing" : 0.0,
+    "status" : "STOPPED_AT",
+    "timestamp" : 1775916352
+  }, {
+    "entityId" : "000012J",
+    "routeId" : "J",
+    "tripId" : "060350_J..S12X006",
+    "latitude" : 0.0,
+    "longitude" : 0.0,
+    "bearing" : 0.0,
+    "status" : "STOPPED_AT",
+    "timestamp" : 1775916532
+  }, {
+    "entityId" : "000014J",
+    "routeId" : "J",
+    "tripId" : "059950_J..S12X006",
+    "latitude" : 0.0,
+    "longitude" : 0.0,
+    "bearing" : 0.0,
+    "status" : "STOPPED_AT",
+    "timestamp" : 1775916532
+  }, {
+    "entityId" : "000016J",
+    "routeId" : "J",
+    "tripId" : "060500_J..N40X003",
+    "latitude" : 0.0,
+    "longitude" : 0.0,
+    "bearing" : 0.0,
+    "status" : "STOPPED_AT",
+    "timestamp" : 1775916532
+  }, {
+    "entityId" : "000018J",
+    "routeId" : "J",
+    "tripId" : "060750_J..S12X006",
+    "latitude" : 0.0,
+    "longitude" : 0.0,
+    "bearing" : 0.0,
+    "status" : "STOPPED_AT",
+    "timestamp" : 1775916532
+  }, {
+    "entityId" : "000020J",
+    "routeId" : "J",
+    "tripId" : "061250_J..S12X006",
+    "latitude" : 0.0,
+    "longitude" : 0.0,
+    "bearing" : 0.0,
+    "status" : "IN_TRANSIT_TO",
+    "timestamp" : 1775916750
+  }, {
+    "entityId" : "000022J",
+    "routeId" : "J",
+    "tripId" : "062050_J..S12X006",
+    "latitude" : 0.0,
+    "longitude" : 0.0,
+    "bearing" : 0.0,
+    "status" : "IN_TRANSIT_TO",
+    "timestamp" : 1775917230
+  }, {
+    "entityId" : "000024J",
+    "routeId" : "J",
+    "tripId" : "061500_J..N40X003",
+    "latitude" : 0.0,
+    "longitude" : 0.0,
+    "bearing" : 0.0,
+    "status" : "IN_TRANSIT_TO",
+    "timestamp" : 1775916900
+  }, {
+    "entityId" : "000026J",
+    "routeId" : "J",
+    "tripId" : "062850_J..S12X006",
+    "latitude" : 0.0,
+    "longitude" : 0.0,
+    "bearing" : 0.0,
+    "status" : "IN_TRANSIT_TO",
+    "timestamp" : 1775917710
+  }, {
+    "entityId" : "000028J",
+    "routeId" : "J",
+    "tripId" : "062500_J..N40X003",
+    "latitude" : 0.0,
+    "longitude" : 0.0,
+    "bearing" : 0.0,
+    "status" : "IN_TRANSIT_TO",
+    "timestamp" : 1775917500
+  }, {
+    "entityId" : "000030J",
+    "routeId" : "J",
+    "tripId" : "063650_J..S12X006",
+    "latitude" : 0.0,
+    "longitude" : 0.0,
+    "bearing" : 0.0,
+    "status" : "IN_TRANSIT_TO",
+    "timestamp" : 1775918190
+  }, {
+    "entityId" : "000032J",
+    "routeId" : "J",
+    "tripId" : "063400_J..N40X003",
+    "latitude" : 0.0,
+    "longitude" : 0.0,
+    "bearing" : 0.0,
+    "status" : "IN_TRANSIT_TO",
+    "timestamp" : 1775918040
+  }, {
+    "entityId" : "000034J",
+    "routeId" : "J",
+    "tripId" : "064450_J..S12X006",
+    "latitude" : 0.0,
+    "longitude" : 0.0,
+    "bearing" : 0.0,
+    "status" : "IN_TRANSIT_TO",
+    "timestamp" : 1775918670
+  }, {
+    "entityId" : "000036J",
+    "routeId" : "J",
+    "tripId" : "064200_J..N40X003",
+    "latitude" : 0.0,
+    "longitude" : 0.0,
+    "bearing" : 0.0,
+    "status" : "IN_TRANSIT_TO",
+    "timestamp" : 1775918520
+  }, {
+    "entityId" : "000038J",
+    "routeId" : "J",
+    "tripId" : "065250_J..S12X006",
+    "latitude" : 0.0,
+    "longitude" : 0.0,
+    "bearing" : 0.0,
+    "status" : "IN_TRANSIT_TO",
+    "timestamp" : 1775919150
+  }, {
+    "entityId" : "000040J",
+    "routeId" : "J",
+    "tripId" : "065000_J..N40X003",
+    "latitude" : 0.0,
+    "longitude" : 0.0,
+    "bearing" : 0.0,
+    "status" : "IN_TRANSIT_TO",
+    "timestamp" : 1775919000
+  }, {
+    "entityId" : "000042J",
+    "routeId" : "J",
+    "tripId" : "066050_J..S12X006",
+    "latitude" : 0.0,
+    "longitude" : 0.0,
+    "bearing" : 0.0,
+    "status" : "IN_TRANSIT_TO",
+    "timestamp" : 1775919630
+  }, {
+    "entityId" : "000044J",
+    "routeId" : "J",
+    "tripId" : "065800_J..N40X003",
+    "latitude" : 0.0,
+    "longitude" : 0.0,
+    "bearing" : 0.0,
+    "status" : "IN_TRANSIT_TO",
+    "timestamp" : 1775919480
+  }, {
+    "entityId" : "000046J",
+    "routeId" : "J",
+    "tripId" : "066850_J..S12X006",
+    "latitude" : 0.0,
+    "longitude" : 0.0,
+    "bearing" : 0.0,
+    "status" : "IN_TRANSIT_TO",
+    "timestamp" : 1775920110
+  }, {
+    "entityId" : "000048J",
+    "routeId" : "J",
+    "tripId" : "066600_J..N40X003",
+    "latitude" : 0.0,
+    "longitude" : 0.0,
+    "bearing" : 0.0,
+    "status" : "IN_TRANSIT_TO",
+    "timestamp" : 1775919960
+  } ],
+  "tripUpdates" : [ {
+    "entityId" : "000001J",
+    "tripId" : "057500_J..N40X003",
+    "routeId" : "J",
+    "startDate" : "20260411",
+    "stopTimeUpdates" : [ {
+      "stopId" : "J23N",
+      "arrivalTime" : 1775916522,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775916522,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J22N",
+      "arrivalTime" : 1775916600,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775916600,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J21N",
+      "arrivalTime" : 1775916690,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775916690,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J20N",
+      "arrivalTime" : 1775916810,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775916810,
+      "departureDelay" : 0
+    } ]
+  }, {
+    "entityId" : "000003J",
+    "tripId" : "058350_J..S12X006",
+    "routeId" : "J",
+    "startDate" : "20260411",
+    "stopTimeUpdates" : [ {
+      "stopId" : "M18S",
+      "arrivalTime" : 1775916512,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775916512,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M19S",
+      "arrivalTime" : 1775916532,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775916532,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M20S",
+      "arrivalTime" : 1775916600,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775916600,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M21S",
+      "arrivalTime" : 1775916690,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775916690,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M22S",
+      "arrivalTime" : 1775916780,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775916780,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M23S",
+      "arrivalTime" : 1775916870,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775916870,
+      "departureDelay" : 0
+    } ]
+  }, {
+    "entityId" : "000005J",
+    "tripId" : "059150_J..S12X006",
+    "routeId" : "J",
+    "startDate" : "20260411",
+    "stopTimeUpdates" : [ {
+      "stopId" : "M18S",
+      "arrivalTime" : 1775916807,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775916807,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M19S",
+      "arrivalTime" : 1775916897,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775916897,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M20S",
+      "arrivalTime" : 1775916987,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775916987,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M21S",
+      "arrivalTime" : 1775917077,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917077,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M22S",
+      "arrivalTime" : 1775917167,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917167,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M23S",
+      "arrivalTime" : 1775917257,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917257,
+      "departureDelay" : 0
+    } ]
+  }, {
+    "entityId" : "000007J",
+    "tripId" : "058500_J..N40X003",
+    "routeId" : "J",
+    "startDate" : "20260411",
+    "stopTimeUpdates" : [ {
+      "stopId" : "M11N",
+      "arrivalTime" : 1775916532,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775916532,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J31N",
+      "arrivalTime" : 1775916600,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775916600,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J30N",
+      "arrivalTime" : 1775916690,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775916690,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J29N",
+      "arrivalTime" : 1775916780,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775916780,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J28N",
+      "arrivalTime" : 1775916870,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775916870,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J27N",
+      "arrivalTime" : 1775916990,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775916990,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J24N",
+      "arrivalTime" : 1775917140,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917140,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J23N",
+      "arrivalTime" : 1775917260,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917260,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J22N",
+      "arrivalTime" : 1775917350,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917350,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J21N",
+      "arrivalTime" : 1775917440,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917440,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J20N",
+      "arrivalTime" : 1775917560,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917560,
+      "departureDelay" : 0
+    } ]
+  }, {
+    "entityId" : "000009J",
+    "tripId" : "059500_J..N40X003",
+    "routeId" : "J",
+    "startDate" : "20260411",
+    "stopTimeUpdates" : [ {
+      "stopId" : "M16N",
+      "arrivalTime" : 1775916703,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775916703,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M14N",
+      "arrivalTime" : 1775916823,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775916823,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M13N",
+      "arrivalTime" : 1775916913,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775916913,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M12N",
+      "arrivalTime" : 1775917003,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917003,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M11N",
+      "arrivalTime" : 1775917063,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917063,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J31N",
+      "arrivalTime" : 1775917153,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917153,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J30N",
+      "arrivalTime" : 1775917243,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917243,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J29N",
+      "arrivalTime" : 1775917333,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917333,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J28N",
+      "arrivalTime" : 1775917423,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917423,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J27N",
+      "arrivalTime" : 1775917543,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917543,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J24N",
+      "arrivalTime" : 1775917693,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917693,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J23N",
+      "arrivalTime" : 1775917813,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917813,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J22N",
+      "arrivalTime" : 1775917903,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917903,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J21N",
+      "arrivalTime" : 1775917993,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917993,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J20N",
+      "arrivalTime" : 1775918113,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918113,
+      "departureDelay" : 0
+    } ]
+  }, {
+    "entityId" : "000011J",
+    "tripId" : "060350_J..S12X006",
+    "routeId" : "J",
+    "startDate" : "20260411",
+    "stopTimeUpdates" : [ {
+      "stopId" : "J23S",
+      "arrivalTime" : 1775916532,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775916532,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J24S",
+      "arrivalTime" : 1775916600,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775916600,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J27S",
+      "arrivalTime" : 1775916720,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775916720,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J28S",
+      "arrivalTime" : 1775917020,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917020,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J29S",
+      "arrivalTime" : 1775917110,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917110,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J30S",
+      "arrivalTime" : 1775917200,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917200,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J31S",
+      "arrivalTime" : 1775917290,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917290,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M11S",
+      "arrivalTime" : 1775917380,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917380,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M12S",
+      "arrivalTime" : 1775917470,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917470,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M13S",
+      "arrivalTime" : 1775917560,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917560,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M14S",
+      "arrivalTime" : 1775917620,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917620,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M16S",
+      "arrivalTime" : 1775917680,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917680,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M18S",
+      "arrivalTime" : 1775918130,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918130,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M19S",
+      "arrivalTime" : 1775918220,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918220,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M20S",
+      "arrivalTime" : 1775918310,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918310,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M21S",
+      "arrivalTime" : 1775918400,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918400,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M22S",
+      "arrivalTime" : 1775918490,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918490,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M23S",
+      "arrivalTime" : 1775918580,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918580,
+      "departureDelay" : 0
+    } ]
+  }, {
+    "entityId" : "000013J",
+    "tripId" : "059950_J..S12X006",
+    "routeId" : "J",
+    "startDate" : "20260411",
+    "stopTimeUpdates" : [ {
+      "stopId" : "M11S",
+      "arrivalTime" : 1775916532,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775916532,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M12S",
+      "arrivalTime" : 1775916600,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775916600,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M13S",
+      "arrivalTime" : 1775916690,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775916690,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M14S",
+      "arrivalTime" : 1775916750,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775916750,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M16S",
+      "arrivalTime" : 1775916810,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775916810,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M18S",
+      "arrivalTime" : 1775917260,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917260,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M19S",
+      "arrivalTime" : 1775917350,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917350,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M20S",
+      "arrivalTime" : 1775917440,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917440,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M21S",
+      "arrivalTime" : 1775917530,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917530,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M22S",
+      "arrivalTime" : 1775917620,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917620,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M23S",
+      "arrivalTime" : 1775917710,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917710,
+      "departureDelay" : 0
+    } ]
+  }, {
+    "entityId" : "000015J",
+    "tripId" : "060500_J..N40X003",
+    "routeId" : "J",
+    "startDate" : "20260411",
+    "stopTimeUpdates" : [ {
+      "stopId" : "M21N",
+      "arrivalTime" : 1775916532,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775916532,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M20N",
+      "arrivalTime" : 1775916600,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775916600,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M19N",
+      "arrivalTime" : 1775916720,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775916720,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M18N",
+      "arrivalTime" : 1775916900,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775916900,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M16N",
+      "arrivalTime" : 1775917470,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917470,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M14N",
+      "arrivalTime" : 1775917590,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917590,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M13N",
+      "arrivalTime" : 1775917680,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917680,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M12N",
+      "arrivalTime" : 1775917770,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917770,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M11N",
+      "arrivalTime" : 1775917830,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917830,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J31N",
+      "arrivalTime" : 1775917920,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917920,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J30N",
+      "arrivalTime" : 1775918010,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918010,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J29N",
+      "arrivalTime" : 1775918100,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918100,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J28N",
+      "arrivalTime" : 1775918190,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918190,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J27N",
+      "arrivalTime" : 1775918310,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918310,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J24N",
+      "arrivalTime" : 1775918460,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918460,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J23N",
+      "arrivalTime" : 1775918580,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918580,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J22N",
+      "arrivalTime" : 1775918670,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918670,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J21N",
+      "arrivalTime" : 1775918760,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918760,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J20N",
+      "arrivalTime" : 1775918880,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918880,
+      "departureDelay" : 0
+    } ]
+  }, {
+    "entityId" : "000017J",
+    "tripId" : "060750_J..S12X006",
+    "routeId" : "J",
+    "startDate" : "20260411",
+    "stopTimeUpdates" : [ {
+      "stopId" : "J28S",
+      "arrivalTime" : 1775916532,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775916532,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J29S",
+      "arrivalTime" : 1775916600,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775916600,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J30S",
+      "arrivalTime" : 1775916690,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775916690,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J31S",
+      "arrivalTime" : 1775916780,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775916780,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M11S",
+      "arrivalTime" : 1775916870,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775916870,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M12S",
+      "arrivalTime" : 1775916960,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775916960,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M13S",
+      "arrivalTime" : 1775917050,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917050,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M14S",
+      "arrivalTime" : 1775917110,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917110,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M16S",
+      "arrivalTime" : 1775917170,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917170,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M18S",
+      "arrivalTime" : 1775917620,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917620,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M19S",
+      "arrivalTime" : 1775917710,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917710,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M20S",
+      "arrivalTime" : 1775917800,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917800,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M21S",
+      "arrivalTime" : 1775917890,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917890,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M22S",
+      "arrivalTime" : 1775917980,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917980,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M23S",
+      "arrivalTime" : 1775918070,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918070,
+      "departureDelay" : 0
+    } ]
+  }, {
+    "entityId" : "000019J",
+    "tripId" : "061250_J..S12X006",
+    "routeId" : "J",
+    "startDate" : "20260411",
+    "stopTimeUpdates" : [ {
+      "stopId" : "J20S",
+      "arrivalTime" : 1775916750,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775916750,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J21S",
+      "arrivalTime" : 1775916870,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775916870,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J22S",
+      "arrivalTime" : 1775916960,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775916960,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J23S",
+      "arrivalTime" : 1775917080,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917080,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J24S",
+      "arrivalTime" : 1775917170,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917170,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J27S",
+      "arrivalTime" : 1775917290,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917290,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J28S",
+      "arrivalTime" : 1775917560,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917560,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J29S",
+      "arrivalTime" : 1775917650,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917650,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J30S",
+      "arrivalTime" : 1775917740,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917740,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J31S",
+      "arrivalTime" : 1775917830,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917830,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M11S",
+      "arrivalTime" : 1775917920,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917920,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M12S",
+      "arrivalTime" : 1775918010,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918010,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M13S",
+      "arrivalTime" : 1775918100,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918100,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M14S",
+      "arrivalTime" : 1775918160,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918160,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M16S",
+      "arrivalTime" : 1775918220,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918220,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M18S",
+      "arrivalTime" : 1775918670,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918670,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M19S",
+      "arrivalTime" : 1775918760,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918760,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M20S",
+      "arrivalTime" : 1775918850,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918850,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M21S",
+      "arrivalTime" : 1775918940,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918940,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M22S",
+      "arrivalTime" : 1775919030,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919030,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M23S",
+      "arrivalTime" : 1775919120,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919120,
+      "departureDelay" : 0
+    } ]
+  }, {
+    "entityId" : "000021J",
+    "tripId" : "062050_J..S12X006",
+    "routeId" : "J",
+    "startDate" : "20260411",
+    "stopTimeUpdates" : [ {
+      "stopId" : "J20S",
+      "arrivalTime" : 1775917230,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917230,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J21S",
+      "arrivalTime" : 1775917350,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917350,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J22S",
+      "arrivalTime" : 1775917440,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917440,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J23S",
+      "arrivalTime" : 1775917560,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917560,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J24S",
+      "arrivalTime" : 1775917650,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917650,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J27S",
+      "arrivalTime" : 1775917770,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917770,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J28S",
+      "arrivalTime" : 1775918040,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918040,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J29S",
+      "arrivalTime" : 1775918130,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918130,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J30S",
+      "arrivalTime" : 1775918220,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918220,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J31S",
+      "arrivalTime" : 1775918310,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918310,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M11S",
+      "arrivalTime" : 1775918400,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918400,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M12S",
+      "arrivalTime" : 1775918490,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918490,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M13S",
+      "arrivalTime" : 1775918580,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918580,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M14S",
+      "arrivalTime" : 1775918640,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918640,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M16S",
+      "arrivalTime" : 1775918700,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918700,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M18S",
+      "arrivalTime" : 1775919150,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919150,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M19S",
+      "arrivalTime" : 1775919240,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919240,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M20S",
+      "arrivalTime" : 1775919330,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919330,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M21S",
+      "arrivalTime" : 1775919420,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919420,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M22S",
+      "arrivalTime" : 1775919510,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919510,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M23S",
+      "arrivalTime" : 1775919600,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919600,
+      "departureDelay" : 0
+    } ]
+  }, {
+    "entityId" : "000023J",
+    "tripId" : "061500_J..N40X003",
+    "routeId" : "J",
+    "startDate" : "20260411",
+    "stopTimeUpdates" : [ {
+      "stopId" : "M23N",
+      "arrivalTime" : 1775916900,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775916900,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M22N",
+      "arrivalTime" : 1775916990,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775916990,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M21N",
+      "arrivalTime" : 1775917080,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917080,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M20N",
+      "arrivalTime" : 1775917200,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917200,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M19N",
+      "arrivalTime" : 1775917320,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917320,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M18N",
+      "arrivalTime" : 1775917440,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917440,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M16N",
+      "arrivalTime" : 1775917950,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917950,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M14N",
+      "arrivalTime" : 1775918070,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918070,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M13N",
+      "arrivalTime" : 1775918160,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918160,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M12N",
+      "arrivalTime" : 1775918250,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918250,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M11N",
+      "arrivalTime" : 1775918310,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918310,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J31N",
+      "arrivalTime" : 1775918400,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918400,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J30N",
+      "arrivalTime" : 1775918490,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918490,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J29N",
+      "arrivalTime" : 1775918580,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918580,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J28N",
+      "arrivalTime" : 1775918670,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918670,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J27N",
+      "arrivalTime" : 1775918790,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918790,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J24N",
+      "arrivalTime" : 1775918940,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918940,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J23N",
+      "arrivalTime" : 1775919060,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919060,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J22N",
+      "arrivalTime" : 1775919150,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919150,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J21N",
+      "arrivalTime" : 1775919240,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919240,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J20N",
+      "arrivalTime" : 1775919360,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919360,
+      "departureDelay" : 0
+    } ]
+  }, {
+    "entityId" : "000025J",
+    "tripId" : "062850_J..S12X006",
+    "routeId" : "J",
+    "startDate" : "20260411",
+    "stopTimeUpdates" : [ {
+      "stopId" : "J20S",
+      "arrivalTime" : 1775917710,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917710,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J21S",
+      "arrivalTime" : 1775917830,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917830,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J22S",
+      "arrivalTime" : 1775917920,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917920,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J23S",
+      "arrivalTime" : 1775918040,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918040,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J24S",
+      "arrivalTime" : 1775918130,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918130,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J27S",
+      "arrivalTime" : 1775918250,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918250,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J28S",
+      "arrivalTime" : 1775918520,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918520,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J29S",
+      "arrivalTime" : 1775918610,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918610,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J30S",
+      "arrivalTime" : 1775918700,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918700,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J31S",
+      "arrivalTime" : 1775918790,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918790,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M11S",
+      "arrivalTime" : 1775918880,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918880,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M12S",
+      "arrivalTime" : 1775918970,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918970,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M13S",
+      "arrivalTime" : 1775919060,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919060,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M14S",
+      "arrivalTime" : 1775919120,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919120,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M16S",
+      "arrivalTime" : 1775919180,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919180,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M18S",
+      "arrivalTime" : 1775919630,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919630,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M19S",
+      "arrivalTime" : 1775919720,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919720,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M20S",
+      "arrivalTime" : 1775919810,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919810,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M21S",
+      "arrivalTime" : 1775919900,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919900,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M22S",
+      "arrivalTime" : 1775919990,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919990,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M23S",
+      "arrivalTime" : 1775920080,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920080,
+      "departureDelay" : 0
+    } ]
+  }, {
+    "entityId" : "000027J",
+    "tripId" : "062500_J..N40X003",
+    "routeId" : "J",
+    "startDate" : "20260411",
+    "stopTimeUpdates" : [ {
+      "stopId" : "M23N",
+      "arrivalTime" : 1775917500,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917500,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M22N",
+      "arrivalTime" : 1775917590,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917590,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M21N",
+      "arrivalTime" : 1775917680,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917680,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M20N",
+      "arrivalTime" : 1775917800,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917800,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M19N",
+      "arrivalTime" : 1775917920,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775917920,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M18N",
+      "arrivalTime" : 1775918040,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918040,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M16N",
+      "arrivalTime" : 1775918550,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918550,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M14N",
+      "arrivalTime" : 1775918670,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918670,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M13N",
+      "arrivalTime" : 1775918760,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918760,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M12N",
+      "arrivalTime" : 1775918850,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918850,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M11N",
+      "arrivalTime" : 1775918910,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918910,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J31N",
+      "arrivalTime" : 1775919000,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919000,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J30N",
+      "arrivalTime" : 1775919090,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919090,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J29N",
+      "arrivalTime" : 1775919180,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919180,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J28N",
+      "arrivalTime" : 1775919270,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919270,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J27N",
+      "arrivalTime" : 1775919390,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919390,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J24N",
+      "arrivalTime" : 1775919540,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919540,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J23N",
+      "arrivalTime" : 1775919660,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919660,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J22N",
+      "arrivalTime" : 1775919750,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919750,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J21N",
+      "arrivalTime" : 1775919840,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919840,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J20N",
+      "arrivalTime" : 1775919960,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919960,
+      "departureDelay" : 0
+    } ]
+  }, {
+    "entityId" : "000029J",
+    "tripId" : "063650_J..S12X006",
+    "routeId" : "J",
+    "startDate" : "20260411",
+    "stopTimeUpdates" : [ {
+      "stopId" : "J20S",
+      "arrivalTime" : 1775918190,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918190,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J21S",
+      "arrivalTime" : 1775918310,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918310,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J22S",
+      "arrivalTime" : 1775918400,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918400,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J23S",
+      "arrivalTime" : 1775918520,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918520,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J24S",
+      "arrivalTime" : 1775918610,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918610,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J27S",
+      "arrivalTime" : 1775918730,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918730,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J28S",
+      "arrivalTime" : 1775919000,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919000,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J29S",
+      "arrivalTime" : 1775919090,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919090,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J30S",
+      "arrivalTime" : 1775919180,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919180,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J31S",
+      "arrivalTime" : 1775919270,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919270,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M11S",
+      "arrivalTime" : 1775919360,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919360,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M12S",
+      "arrivalTime" : 1775919450,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919450,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M13S",
+      "arrivalTime" : 1775919540,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919540,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M14S",
+      "arrivalTime" : 1775919600,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919600,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M16S",
+      "arrivalTime" : 1775919660,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919660,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M18S",
+      "arrivalTime" : 1775920110,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920110,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M19S",
+      "arrivalTime" : 1775920200,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920200,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M20S",
+      "arrivalTime" : 1775920290,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920290,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M21S",
+      "arrivalTime" : 1775920380,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920380,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M22S",
+      "arrivalTime" : 1775920470,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920470,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M23S",
+      "arrivalTime" : 1775920560,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920560,
+      "departureDelay" : 0
+    } ]
+  }, {
+    "entityId" : "000031J",
+    "tripId" : "063400_J..N40X003",
+    "routeId" : "J",
+    "startDate" : "20260411",
+    "stopTimeUpdates" : [ {
+      "stopId" : "M23N",
+      "arrivalTime" : 1775918040,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918040,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M22N",
+      "arrivalTime" : 1775918130,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918130,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M21N",
+      "arrivalTime" : 1775918220,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918220,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M20N",
+      "arrivalTime" : 1775918340,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918340,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M19N",
+      "arrivalTime" : 1775918460,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918460,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M18N",
+      "arrivalTime" : 1775918580,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918580,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M16N",
+      "arrivalTime" : 1775919090,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919090,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M14N",
+      "arrivalTime" : 1775919210,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919210,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M13N",
+      "arrivalTime" : 1775919300,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919300,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M12N",
+      "arrivalTime" : 1775919390,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919390,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M11N",
+      "arrivalTime" : 1775919450,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919450,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J31N",
+      "arrivalTime" : 1775919540,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919540,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J30N",
+      "arrivalTime" : 1775919630,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919630,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J29N",
+      "arrivalTime" : 1775919720,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919720,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J28N",
+      "arrivalTime" : 1775919810,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919810,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J27N",
+      "arrivalTime" : 1775919930,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919930,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J24N",
+      "arrivalTime" : 1775920080,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920080,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J23N",
+      "arrivalTime" : 1775920200,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920200,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J22N",
+      "arrivalTime" : 1775920290,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920290,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J21N",
+      "arrivalTime" : 1775920380,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920380,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J20N",
+      "arrivalTime" : 1775920500,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920500,
+      "departureDelay" : 0
+    } ]
+  }, {
+    "entityId" : "000033J",
+    "tripId" : "064450_J..S12X006",
+    "routeId" : "J",
+    "startDate" : "20260411",
+    "stopTimeUpdates" : [ {
+      "stopId" : "J20S",
+      "arrivalTime" : 1775918670,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918670,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J21S",
+      "arrivalTime" : 1775918790,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918790,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J22S",
+      "arrivalTime" : 1775918880,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918880,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J23S",
+      "arrivalTime" : 1775919000,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919000,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J24S",
+      "arrivalTime" : 1775919090,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919090,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J27S",
+      "arrivalTime" : 1775919210,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919210,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J28S",
+      "arrivalTime" : 1775919480,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919480,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J29S",
+      "arrivalTime" : 1775919570,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919570,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J30S",
+      "arrivalTime" : 1775919660,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919660,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J31S",
+      "arrivalTime" : 1775919750,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919750,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M11S",
+      "arrivalTime" : 1775919840,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919840,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M12S",
+      "arrivalTime" : 1775919930,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919930,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M13S",
+      "arrivalTime" : 1775920020,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920020,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M14S",
+      "arrivalTime" : 1775920080,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920080,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M16S",
+      "arrivalTime" : 1775920140,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920140,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M18S",
+      "arrivalTime" : 1775920590,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920590,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M19S",
+      "arrivalTime" : 1775920680,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920680,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M20S",
+      "arrivalTime" : 1775920770,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920770,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M21S",
+      "arrivalTime" : 1775920860,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920860,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M22S",
+      "arrivalTime" : 1775920950,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920950,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M23S",
+      "arrivalTime" : 1775921040,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775921040,
+      "departureDelay" : 0
+    } ]
+  }, {
+    "entityId" : "000035J",
+    "tripId" : "064200_J..N40X003",
+    "routeId" : "J",
+    "startDate" : "20260411",
+    "stopTimeUpdates" : [ {
+      "stopId" : "M23N",
+      "arrivalTime" : 1775918520,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918520,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M22N",
+      "arrivalTime" : 1775918610,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918610,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M21N",
+      "arrivalTime" : 1775918700,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918700,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M20N",
+      "arrivalTime" : 1775918820,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918820,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M19N",
+      "arrivalTime" : 1775918940,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775918940,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M18N",
+      "arrivalTime" : 1775919060,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919060,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M16N",
+      "arrivalTime" : 1775919570,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919570,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M14N",
+      "arrivalTime" : 1775919690,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919690,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M13N",
+      "arrivalTime" : 1775919780,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919780,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M12N",
+      "arrivalTime" : 1775919870,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919870,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M11N",
+      "arrivalTime" : 1775919930,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919930,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J31N",
+      "arrivalTime" : 1775920020,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920020,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J30N",
+      "arrivalTime" : 1775920110,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920110,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J29N",
+      "arrivalTime" : 1775920200,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920200,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J28N",
+      "arrivalTime" : 1775920290,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920290,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J27N",
+      "arrivalTime" : 1775920410,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920410,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J24N",
+      "arrivalTime" : 1775920560,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920560,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J23N",
+      "arrivalTime" : 1775920680,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920680,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J22N",
+      "arrivalTime" : 1775920770,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920770,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J21N",
+      "arrivalTime" : 1775920860,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920860,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J20N",
+      "arrivalTime" : 1775920980,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920980,
+      "departureDelay" : 0
+    } ]
+  }, {
+    "entityId" : "000037J",
+    "tripId" : "065250_J..S12X006",
+    "routeId" : "J",
+    "startDate" : "20260411",
+    "stopTimeUpdates" : [ {
+      "stopId" : "J20S",
+      "arrivalTime" : 1775919150,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919150,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J21S",
+      "arrivalTime" : 1775919270,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919270,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J22S",
+      "arrivalTime" : 1775919360,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919360,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J23S",
+      "arrivalTime" : 1775919480,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919480,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J24S",
+      "arrivalTime" : 1775919570,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919570,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J27S",
+      "arrivalTime" : 1775919690,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919690,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J28S",
+      "arrivalTime" : 1775919960,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919960,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J29S",
+      "arrivalTime" : 1775920050,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920050,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J30S",
+      "arrivalTime" : 1775920140,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920140,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J31S",
+      "arrivalTime" : 1775920230,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920230,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M11S",
+      "arrivalTime" : 1775920320,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920320,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M12S",
+      "arrivalTime" : 1775920410,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920410,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M13S",
+      "arrivalTime" : 1775920500,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920500,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M14S",
+      "arrivalTime" : 1775920560,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920560,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M16S",
+      "arrivalTime" : 1775920620,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920620,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M18S",
+      "arrivalTime" : 1775921070,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775921070,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M19S",
+      "arrivalTime" : 1775921160,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775921160,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M20S",
+      "arrivalTime" : 1775921250,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775921250,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M21S",
+      "arrivalTime" : 1775921340,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775921340,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M22S",
+      "arrivalTime" : 1775921430,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775921430,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M23S",
+      "arrivalTime" : 1775921520,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775921520,
+      "departureDelay" : 0
+    } ]
+  }, {
+    "entityId" : "000039J",
+    "tripId" : "065000_J..N40X003",
+    "routeId" : "J",
+    "startDate" : "20260411",
+    "stopTimeUpdates" : [ {
+      "stopId" : "M23N",
+      "arrivalTime" : 1775919000,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919000,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M22N",
+      "arrivalTime" : 1775919090,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919090,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M21N",
+      "arrivalTime" : 1775919180,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919180,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M20N",
+      "arrivalTime" : 1775919300,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919300,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M19N",
+      "arrivalTime" : 1775919420,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919420,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M18N",
+      "arrivalTime" : 1775919540,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919540,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M16N",
+      "arrivalTime" : 1775920050,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920050,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M14N",
+      "arrivalTime" : 1775920170,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920170,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M13N",
+      "arrivalTime" : 1775920260,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920260,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M12N",
+      "arrivalTime" : 1775920350,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920350,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M11N",
+      "arrivalTime" : 1775920410,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920410,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J31N",
+      "arrivalTime" : 1775920500,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920500,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J30N",
+      "arrivalTime" : 1775920590,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920590,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J29N",
+      "arrivalTime" : 1775920680,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920680,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J28N",
+      "arrivalTime" : 1775920770,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920770,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J27N",
+      "arrivalTime" : 1775920890,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920890,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J24N",
+      "arrivalTime" : 1775921040,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775921040,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J23N",
+      "arrivalTime" : 1775921160,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775921160,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J22N",
+      "arrivalTime" : 1775921250,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775921250,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J21N",
+      "arrivalTime" : 1775921340,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775921340,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J20N",
+      "arrivalTime" : 1775921460,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775921460,
+      "departureDelay" : 0
+    } ]
+  }, {
+    "entityId" : "000041J",
+    "tripId" : "066050_J..S12X006",
+    "routeId" : "J",
+    "startDate" : "20260411",
+    "stopTimeUpdates" : [ {
+      "stopId" : "J20S",
+      "arrivalTime" : 1775919630,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919630,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J21S",
+      "arrivalTime" : 1775919750,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919750,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J22S",
+      "arrivalTime" : 1775919840,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919840,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J23S",
+      "arrivalTime" : 1775919960,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919960,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J24S",
+      "arrivalTime" : 1775920050,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920050,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J27S",
+      "arrivalTime" : 1775920170,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920170,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J28S",
+      "arrivalTime" : 1775920440,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920440,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J29S",
+      "arrivalTime" : 1775920530,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920530,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J30S",
+      "arrivalTime" : 1775920620,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920620,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J31S",
+      "arrivalTime" : 1775920710,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920710,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M11S",
+      "arrivalTime" : 1775920800,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920800,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M12S",
+      "arrivalTime" : 1775920890,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920890,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M13S",
+      "arrivalTime" : 1775920980,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920980,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M14S",
+      "arrivalTime" : 1775921040,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775921040,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M16S",
+      "arrivalTime" : 1775921100,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775921100,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M18S",
+      "arrivalTime" : 1775921550,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775921550,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M19S",
+      "arrivalTime" : 1775921640,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775921640,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M20S",
+      "arrivalTime" : 1775921730,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775921730,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M21S",
+      "arrivalTime" : 1775921820,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775921820,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M22S",
+      "arrivalTime" : 1775921910,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775921910,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M23S",
+      "arrivalTime" : 1775922000,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775922000,
+      "departureDelay" : 0
+    } ]
+  }, {
+    "entityId" : "000043J",
+    "tripId" : "065800_J..N40X003",
+    "routeId" : "J",
+    "startDate" : "20260411",
+    "stopTimeUpdates" : [ {
+      "stopId" : "M23N",
+      "arrivalTime" : 1775919480,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919480,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M22N",
+      "arrivalTime" : 1775919570,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919570,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M21N",
+      "arrivalTime" : 1775919660,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919660,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M20N",
+      "arrivalTime" : 1775919780,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919780,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M19N",
+      "arrivalTime" : 1775919900,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919900,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M18N",
+      "arrivalTime" : 1775920020,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920020,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M16N",
+      "arrivalTime" : 1775920530,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920530,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M14N",
+      "arrivalTime" : 1775920650,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920650,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M13N",
+      "arrivalTime" : 1775920740,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920740,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M12N",
+      "arrivalTime" : 1775920830,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920830,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M11N",
+      "arrivalTime" : 1775920890,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920890,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J31N",
+      "arrivalTime" : 1775920980,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920980,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J30N",
+      "arrivalTime" : 1775921070,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775921070,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J29N",
+      "arrivalTime" : 1775921160,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775921160,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J28N",
+      "arrivalTime" : 1775921250,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775921250,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J27N",
+      "arrivalTime" : 1775921370,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775921370,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J24N",
+      "arrivalTime" : 1775921520,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775921520,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J23N",
+      "arrivalTime" : 1775921640,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775921640,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J22N",
+      "arrivalTime" : 1775921730,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775921730,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J21N",
+      "arrivalTime" : 1775921820,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775921820,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J20N",
+      "arrivalTime" : 1775921940,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775921940,
+      "departureDelay" : 0
+    } ]
+  }, {
+    "entityId" : "000045J",
+    "tripId" : "066850_J..S12X006",
+    "routeId" : "J",
+    "startDate" : "20260411",
+    "stopTimeUpdates" : [ {
+      "stopId" : "J20S",
+      "arrivalTime" : 1775920110,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920110,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J21S",
+      "arrivalTime" : 1775920230,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920230,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J22S",
+      "arrivalTime" : 1775920320,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920320,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J23S",
+      "arrivalTime" : 1775920440,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920440,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J24S",
+      "arrivalTime" : 1775920530,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920530,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J27S",
+      "arrivalTime" : 1775920650,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920650,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J28S",
+      "arrivalTime" : 1775920920,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920920,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J29S",
+      "arrivalTime" : 1775921010,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775921010,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J30S",
+      "arrivalTime" : 1775921100,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775921100,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J31S",
+      "arrivalTime" : 1775921190,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775921190,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M11S",
+      "arrivalTime" : 1775921280,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775921280,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M12S",
+      "arrivalTime" : 1775921370,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775921370,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M13S",
+      "arrivalTime" : 1775921460,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775921460,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M14S",
+      "arrivalTime" : 1775921520,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775921520,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M16S",
+      "arrivalTime" : 1775921580,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775921580,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M18S",
+      "arrivalTime" : 1775922030,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775922030,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M19S",
+      "arrivalTime" : 1775922120,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775922120,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M20S",
+      "arrivalTime" : 1775922210,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775922210,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M21S",
+      "arrivalTime" : 1775922300,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775922300,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M22S",
+      "arrivalTime" : 1775922390,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775922390,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M23S",
+      "arrivalTime" : 1775922480,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775922480,
+      "departureDelay" : 0
+    } ]
+  }, {
+    "entityId" : "000047J",
+    "tripId" : "066600_J..N40X003",
+    "routeId" : "J",
+    "startDate" : "20260411",
+    "stopTimeUpdates" : [ {
+      "stopId" : "M23N",
+      "arrivalTime" : 1775919960,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775919960,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M22N",
+      "arrivalTime" : 1775920050,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920050,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M21N",
+      "arrivalTime" : 1775920140,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920140,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M20N",
+      "arrivalTime" : 1775920260,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920260,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M19N",
+      "arrivalTime" : 1775920380,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920380,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M18N",
+      "arrivalTime" : 1775920500,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775920500,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M16N",
+      "arrivalTime" : 1775921010,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775921010,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M14N",
+      "arrivalTime" : 1775921130,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775921130,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M13N",
+      "arrivalTime" : 1775921220,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775921220,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M12N",
+      "arrivalTime" : 1775921310,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775921310,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "M11N",
+      "arrivalTime" : 1775921370,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775921370,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J31N",
+      "arrivalTime" : 1775921460,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775921460,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J30N",
+      "arrivalTime" : 1775921550,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775921550,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J29N",
+      "arrivalTime" : 1775921640,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775921640,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J28N",
+      "arrivalTime" : 1775921730,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775921730,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J27N",
+      "arrivalTime" : 1775921850,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775921850,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J24N",
+      "arrivalTime" : 1775922000,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775922000,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J23N",
+      "arrivalTime" : 1775922120,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775922120,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J22N",
+      "arrivalTime" : 1775922210,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775922210,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J21N",
+      "arrivalTime" : 1775922300,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775922300,
+      "departureDelay" : 0
+    }, {
+      "stopId" : "J20N",
+      "arrivalTime" : 1775922420,
+      "arrivalDelay" : 0,
+      "departureTime" : 1775922420,
+      "departureDelay" : 0
+    } ]
+  } ],
+  "alerts" : [ ]
+}

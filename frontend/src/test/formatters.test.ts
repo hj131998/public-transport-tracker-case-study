@@ -5,8 +5,10 @@ import {
   formatDelay,
   formatDuration,
   dataSourceBadge,
+  alertBg,
   alertIcon,
-} from '../../utils/formatters';
+  severityBadge,
+} from '../utils/formatters';
 
 describe('formatters', () => {
   describe('crowdingLabel', () => {
@@ -46,10 +48,37 @@ describe('formatters', () => {
     });
   });
 
+  describe('alertBg', () => {
+    it('returns orange classes for DELAY', () => {
+      expect(alertBg('DELAY')).toBe('bg-orange-50 border-orange-400');
+    });
+    it('returns red classes for DISRUPTION', () => {
+      expect(alertBg('DISRUPTION')).toBe('bg-red-50 border-red-400');
+    });
+    it('returns yellow classes for CROWDING', () => {
+      expect(alertBg('CROWDING')).toBe('bg-yellow-50 border-yellow-400');
+    });
+    it('returns blue classes for WEATHER', () => {
+      expect(alertBg('WEATHER')).toBe('bg-blue-50 border-blue-400');
+    });
+  });
+
   describe('alertIcon', () => {
     it('returns clock for DELAY', () => expect(alertIcon('DELAY')).toBe('⏱'));
     it('returns siren for DISRUPTION', () => expect(alertIcon('DISRUPTION')).toBe('🚨'));
     it('returns people for CROWDING', () => expect(alertIcon('CROWDING')).toBe('👥'));
     it('returns rain for WEATHER', () => expect(alertIcon('WEATHER')).toBe('🌧'));
+  });
+
+  describe('severityBadge', () => {
+    it('returns gray classes for LOW severity', () => {
+      expect(severityBadge('LOW')).toBe('bg-gray-100 text-gray-700');
+    });
+    it('returns yellow classes for MEDIUM severity', () => {
+      expect(severityBadge('MEDIUM')).toBe('bg-yellow-100 text-yellow-800');
+    });
+    it('returns red classes for HIGH severity', () => {
+      expect(severityBadge('HIGH')).toBe('bg-red-100 text-red-800');
+    });
   });
 });

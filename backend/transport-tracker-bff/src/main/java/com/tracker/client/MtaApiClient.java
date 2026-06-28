@@ -33,6 +33,7 @@ import java.util.List;
  */
 @Slf4j
 @Component
+@org.springframework.core.annotation.Order(1) // First priority for NYC subway
 public class MtaApiClient implements TransitDataProvider {
 
     private final WebClient webClient;

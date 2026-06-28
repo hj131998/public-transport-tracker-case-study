@@ -59,9 +59,12 @@ export interface TransitResponse {
   links: Record<string, HateoasLink>;
 }
 
+export type TransitMode = 'BUS' | 'SUBWAY';
+
 export interface TransitQuery {
   city: string;
   route: string;
+  mode: TransitMode;
 }
 
 export interface RoutePlanQuery {

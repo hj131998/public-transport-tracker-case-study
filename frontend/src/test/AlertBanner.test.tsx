@@ -1,8 +1,7 @@
-import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
-import AlertBanner from '../../components/AlertBanner/AlertBanner';
-import { Alert } from '../../types/transit.types';
+import AlertBanner from '../components/AlertBanner/AlertBanner';
+import { Alert } from '../types/transit.types';
 
 const makeAlert = (overrides: Partial<Alert> = {}): Alert => ({
   type: 'DELAY',

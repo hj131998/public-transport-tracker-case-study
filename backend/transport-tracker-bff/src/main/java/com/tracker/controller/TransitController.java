@@ -4,6 +4,7 @@ import com.tracker.model.Alert;
 import com.tracker.model.RoutePlan;
 import com.tracker.model.TransitResponse;
 import com.tracker.model.VehiclePosition;
+import com.tracker.model.enums.TransitMode;
 import com.tracker.service.TransitAggregatorService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -33,24 +34,28 @@ public class TransitController {
     @Operation(summary = "Get aggregated transit data for a city and route")
     public ResponseEntity<TransitResponse> getTransitData(
             @Parameter(description = "City code e.g. NYC") @RequestParam @NotBlank String city,
-            @Parameter(description = "Route identifier e.g. M15") @RequestParam @NotBlank String route) {
-        return ResponseEntity.ok(aggregatorService.aggregate(city, route));
+            @Parameter(description = "Route identifier e.g. M15") @RequestParam @NotBlank String route,
+            @Parameter(description = "Transit mode: BUS or SUBWAY (defaults to BUS)")
+            @RequestParam(defaultValue = "BUS") TransitMode mode) {
+        return ResponseEntity.ok(aggregatorService.aggregate(city, route, mode));
     }
 
     @GetMapping("/transit/{routeId}/vehicles")
     @Operation(summary = "Get vehicle positions for a specific route")
     public ResponseEntity<List<VehiclePosition>> getVehicles(
             @PathVariable @NotBlank String routeId,
-            @RequestParam @NotBlank String city) {
-        return ResponseEntity.ok(aggregatorService.getVehicles(city, routeId));
+            @RequestParam @NotBlank String city,
+            @RequestParam(defaultValue = "BUS") TransitMode mode) {
+        return ResponseEntity.ok(aggregatorService.getVehicles(city, routeId, mode));
     }
 
     @GetMapping("/transit/{routeId}/alerts")
     @Operation(summary = "Get active alerts for a specific route")
     public ResponseEntity<List<Alert>> getAlerts(
             @PathVariable @NotBlank String routeId,
-            @RequestParam @NotBlank String city) {
-        return ResponseEntity.ok(aggregatorService.getAlerts(city, routeId));
+            @RequestParam @NotBlank String city,
+            @RequestParam(defaultValue = "BUS") TransitMode mode) {
+        return ResponseEntity.ok(aggregatorService.getAlerts(city, routeId, mode));
     }
 
     @GetMapping("/routes/plan")

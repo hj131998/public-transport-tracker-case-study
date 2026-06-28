@@ -1,4 +1,3 @@
-import React from 'react';
 import { DataSource } from '../../types/transit.types';
 import { dataSourceBadge } from '../../utils/formatters';
 import { useOfflineMode } from '../../hooks/useOfflineMode';

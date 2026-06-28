@@ -12,7 +12,7 @@ export function useTransitData() {
     if (!state.query) return;
     dispatch({ type: 'FETCH_START' });
     try {
-      const data = await transitApi.getTransitData(state.query.city, state.query.route);
+      const data = await transitApi.getTransitData(state.query.city, state.query.route, state.query.mode);
       dispatch({ type: 'FETCH_SUCCESS', payload: data });
       // Push new alerts as notifications
       data.alerts.forEach((alert) => dispatch({ type: 'ADD_NOTIFICATION', payload: alert }));

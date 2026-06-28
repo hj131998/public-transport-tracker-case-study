@@ -1,4 +1,4 @@
-import React, { useState, Suspense, lazy } from 'react';
+import { useState, Suspense, lazy } from 'react';
 import RouteSearchPanel from '../components/RouteSearchPanel/RouteSearchPanel';
 import AlertBanner from '../components/AlertBanner/AlertBanner';
 import VehicleList from '../components/VehicleList/VehicleList';

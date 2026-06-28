@@ -1,4 +1,4 @@
-import React, { useState, Suspense, lazy } from 'react';
+import { useState, Suspense, lazy } from 'react';
 import VehicleList from '../components/VehicleList/VehicleList';
 import AlertBanner from '../components/AlertBanner/AlertBanner';
 import OfflineModeToggle from '../components/OfflineModeToggle/OfflineModeToggle';

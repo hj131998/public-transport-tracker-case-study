@@ -5,7 +5,7 @@ services:
   # ── BFF Gateway ─────────────────────────────────────────────────────────────
   bff:
     build:
-      context: ./backend/transport-tracker-bff
+      context: ./transport-tracker-bff
       dockerfile: Dockerfile
     image: transport-tracker/bff:latest
     container_name: transport-tracker-bff
@@ -13,6 +13,7 @@ services:
       - "8080:8080"
     environment:
       APP_ENV:                  ${APP_ENV:-dev}
+      DATA_SOURCE_MODE:         ${DATA_SOURCE_MODE:-MOCK}
       MTA_API_KEY:              ${MTA_API_KEY:-mock-mta-key}
       TRANSIT_LAND_API_KEY:     ${TRANSIT_LAND_API_KEY:-mock-tl-key}
       MTA_BASE_URL:             ${MTA_BASE_URL:-https://api.mta.info}
@@ -31,14 +32,12 @@ services:
   # ── Frontend ─────────────────────────────────────────────────────────────────
   frontend:
     build:
-      context: ./frontend
+      context: ../frontend
       dockerfile: Dockerfile
     image: transport-tracker/frontend:latest
     container_name: transport-tracker-frontend
     ports:
       - "3000:80"
-    environment:
-      REACT_APP_API_BASE_URL: http://localhost:8080
     depends_on:
       bff:
         condition: service_healthy

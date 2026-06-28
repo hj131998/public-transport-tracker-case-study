@@ -1,4 +1,3 @@
-import React from 'react';
 import { Alert } from '../../types/transit.types';
 import { alertBg, alertIcon, severityBadge } from '../../utils/formatters';
 

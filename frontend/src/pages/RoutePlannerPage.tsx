@@ -1,4 +1,4 @@
-import React, { useState, FormEvent } from 'react';
+import { useState, FormEvent } from 'react';
 import { transitApi } from '../services/apiService';
 import { RoutePlan } from '../types/transit.types';
 import RouteAlternatives from '../components/RouteAlternatives/RouteAlternatives';

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { VehiclePosition } from '../../types/transit.types';
 import { crowdingColor, crowdingBg, crowdingLabel, formatDelay } from '../../utils/formatters';
 

@@ -1,5 +1,5 @@
 import axios, { AxiosInstance, AxiosError } from 'axios';
-import { TransitResponse, VehiclePosition, Alert, RoutePlan } from '../types/transit.types';
+import { TransitResponse, VehiclePosition, Alert, RoutePlan, TransitMode } from '../types/transit.types';
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL ?? '/api/v1';
 
@@ -28,19 +28,19 @@ apiClient.interceptors.response.use(
 );
 
 export const transitApi = {
-  getTransitData: (city: string, route: string): Promise<TransitResponse> =>
+  getTransitData: (city: string, route: string, mode: TransitMode = 'BUS'): Promise<TransitResponse> =>
     apiClient
-      .get<TransitResponse>('/transit', { params: { city, route } })
+      .get<TransitResponse>('/transit', { params: { city, route, mode } })
       .then((r) => r.data),
 
-  getVehicles: (city: string, routeId: string): Promise<VehiclePosition[]> =>
+  getVehicles: (city: string, routeId: string, mode: TransitMode = 'BUS'): Promise<VehiclePosition[]> =>
     apiClient
-      .get<VehiclePosition[]>(`/transit/${routeId}/vehicles`, { params: { city } })
+      .get<VehiclePosition[]>(`/transit/${routeId}/vehicles`, { params: { city, mode } })
       .then((r) => r.data),
 
-  getAlerts: (city: string, routeId: string): Promise<Alert[]> =>
+  getAlerts: (city: string, routeId: string, mode: TransitMode = 'BUS'): Promise<Alert[]> =>
     apiClient
-      .get<Alert[]>(`/transit/${routeId}/alerts`, { params: { city } })
+      .get<Alert[]>(`/transit/${routeId}/alerts`, { params: { city, mode } })
       .then((r) => r.data),
 
   planRoute: (city: string, from: string, to: string): Promise<RoutePlan> =>

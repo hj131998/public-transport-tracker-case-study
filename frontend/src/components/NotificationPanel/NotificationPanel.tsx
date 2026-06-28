@@ -1,4 +1,3 @@
-import React from 'react';
 import { useNotifications } from '../../hooks/useNotifications';
 import { alertIcon, alertBg } from '../../utils/formatters';
 import { formatDistanceToNow } from 'date-fns';

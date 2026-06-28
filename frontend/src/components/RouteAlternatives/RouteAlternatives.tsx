@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { RoutePlan, Route } from '../../types/transit.types';
 import { formatDuration } from '../../utils/formatters';
 
